@@ -6,6 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument} from 'angularfire2/firestor
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs'
+import { UpcomingService } from 'src/app/services/upcoming.service';
 
 @Component({
   selector: 'app-admin-view',
@@ -14,11 +15,15 @@ import { Observable } from 'rxjs'
 })
 export class AdminViewComponent implements OnInit {
 
-  items: Array<any>
+  topic: string;
+  description: string;
+  date: string;
+  created: boolean;
 
   constructor(
     public eventService: EventService,
     private router: Router,
+    public upcomingService: UpcomingService,
     private route: ActivatedRoute,
     public afs: AngularFirestore,public authService : AuthService, public angularFireAuth : AngularFireAuth
   ) { }
@@ -28,7 +33,20 @@ currentUser:any;
    
   }
 
-  
+  createUpcoming() {
+    const data = {
+      topic: this.topic,
+      date: this.date,
+      description: this.description
+    };
 
+    this.created= true;
+    this.upcomingService.createE(data)
+    setTimeout(() => {
+      this.created = false;
+      this.router.navigate(['/events'])
+    },3000);
+  }
+ 
 
 }

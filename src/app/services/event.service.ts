@@ -6,7 +6,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import {Event} from '../shared/event';
-import {Events } from '../shared/events';
+import { Upcoming } from '../shared/events';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,15 +17,13 @@ export class EventService {
   Galleryitems : any 
   approveEvent : AngularFirestoreDocument<Event>
   feedback: any;
-  itemsCollection1 : AngularFirestoreCollection<Events>
-  items1 : Observable<Events[]>
-  itemDoc1 : AngularFirestoreDocument<Events>
+
   constructor(
     public db: AngularFirestore,
     public router : Router
   ) {
     this.itemsCollection = this.db.collection('event',ref=> ref.orderBy("date","desc"))
-    this.itemsCollection1 = this.db.collection('events');
+
 
    }
 

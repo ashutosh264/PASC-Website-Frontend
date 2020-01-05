@@ -5,6 +5,8 @@ import {ElementRef} from '@angular/core';
 import {EventService } from '../../services/event.service';
 import {Params, Router,ActivatedRoute} from '@angular/router';
 import {Event} from '../../shared/event';
+import{UpcomingService} from '../../services/upcoming.service';
+import { Upcoming } from 'src/app/shared/events';
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
@@ -15,12 +17,16 @@ export class EventsComponent implements OnInit {
   events: Event[];
   event: Event;
 
+  upcomings: Upcoming[];
+  upcoming: Upcoming;
+
   
 
   constructor(private elementRef:ElementRef,
     public eventService: EventService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    public upcomingService: UpcomingService) { }
 
   ngOnInit() {
     var s = document.createElement("script");
@@ -29,6 +35,7 @@ export class EventsComponent implements OnInit {
   this.elementRef.nativeElement.appendChild(s);
 
   this.eventService.getEventsFromFirestore().subscribe(items =>{this.events = items});
+  this.upcomingService.getEventFromFirestore().subscribe(item => {this.upcomings = item});
   }
 
   

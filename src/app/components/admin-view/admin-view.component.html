@@ -1,1 +1,25 @@
-<p>sadkjds</p>
+<br><br><br><br><br>
+
+<nav class="navbar navbar-light bg-info">
+    <span class="navbar-brand mb-0 h1">Admin Panel</span>
+  </nav>
+  
+ <div class="container" >
+
+  <div>
+    <mat-form-field>
+    <input matInput placeholder="Date (dd/mm/yyyy)" [(ngModel)] = "date" class="input-field" >
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Topic" [(ngModel)] = "topic" class="input-field" >
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Description" [(ngModel)] = "description" class="input-field" >
+      </mat-form-field>
+    
+          <button mat-raised-button color="blue" class="btn btn-primary m-4" (click)="createUpcoming()"
+          [disabled]="!date || !description || !topic">Create Event</button>
+  </div>
+
+</div> 
+

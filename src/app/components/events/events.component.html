@@ -1,7 +1,37 @@
 <div class="m-5"></div>
 <div class="selfmargin">
+<section id="heading">
+  <div class="container hdAndText" style="text-align:left; ">
+  <h1 class="h1text">
+    Upcoming Events
+  </h1>
+  <div class="yellow_line">
 
+  </div>
+  </div>
+</section>
+<section>
+  <ng-container *ngFor= "let upcoming of upcomings">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-3">
+        <div class="card m-3">
+        <div class="card-block">
+          <h4 class="card-title"> {{upcoming.topic}} </h4>
+        </div>
+        <div class="card-footer">
 
+           <p class="card-text"> {{upcoming.description}} </p>
+        </div>
+        <small class="text-muted"> {{upcoming.date}} </small>
+      </div>
+      </div>
+   
+    
+  </div>
+  </div>
+   </ng-container>
+</section>
 <section id="heading">
   <div class="container hdAndText" style="text-align: left;">
     <h1 class="h1text">EVENTS</h1>

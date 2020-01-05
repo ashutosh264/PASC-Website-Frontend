@@ -8,7 +8,7 @@ import { BlogDetailComponent } from './components/blog-detail/blog-detail.compon
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { MatIconModule, MatIcon } from '@angular/material/icon';
-
+import { UpcomingService} from './services/upcoming.service';
 import { environment } from '../environments/environment'
 import { AngularFireModule } from 'angularfire2'
 import { AngularFirestoreModule } from 'angularfire2/firestore'
