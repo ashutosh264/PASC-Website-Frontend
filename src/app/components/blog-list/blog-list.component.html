@@ -1,0 +1,16 @@
+<app-home-landing></app-home-landing>
+<div class="container">
+  <div *ngIf="blogs">
+    <div class="row">
+      <ng-container *ngFor="let blog of blogs">
+        <ng-container *ngIf="blog.approve">
+          <app-blog [blog]="blog" class="col-md-4"></app-blog>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div [hidden]="blogs" class="text-center">
+    <mat-spinner style="margin:0 auto;" 
+    mode="indeterminate"></mat-spinner>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+
+<br><br><br><br><br>
+
+<nav class="navbar navbar-light bg-info">
+    <span class="navbar-brand mb-0 h1">Admin Panel</span>
+  </nav>
+  
+ <div class="container" >
+
+  <div>
+    <mat-form-field>
+    <input matInput placeholder="Date (dd/mm/yyyy)" [(ngModel)] = "date" class="input-field" >
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Activity" [(ngModel)] = "activity" class="input-field" >
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Attendees" [(ngModel)] = "attendees" class="input-field" >
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Details" [(ngModel)] = "details" class="input-field" >
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Speaker" [(ngModel)] = "speaker" class="input-field" >
+          </mat-form-field>
+
+
+          <button mat-raised-button color="blue" class="btn btn-primary m-4" (click)="createEvent()"
+          [disabled]="!date || !activity || !details">Create Event</button>
+  </div>
+
+</div> 
+

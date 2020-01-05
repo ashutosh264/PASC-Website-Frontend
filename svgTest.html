@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script>
+    var canvas, mapToModel, elementScope;
+
+            /**
+             * To be fired when the image has been loaded
+             */
+            var imageOnLoad = function(){
+                canvas.width = this.width;
+                canvas.height = this.height;
+                canvas.getContext("2d").drawImage(this,0,0);
+            };
+
+            /**
+             * To be fired when the FileReader has loaded
+             * @param loadEvent {{}}
+             */
+            var readerOnLoad = function(loadEvent){
+                var img = new Image();
+                img.onload = imageOnLoad;
+                img.src = loadEvent.target.result;
+                if(mapToModel) {
+                    setModelValue(elementScope, mapToModel, img.src);
+                }
+            };
+
+            /**
+             * This allows us to set the value of a model in the scope of the element (or global scope if the
+             * model is an object)
+             * @param scope {{}}
+             * @param modelReference {string}
+             * @param value {*}
+             */
+            var setModelValue = function(scope, modelReference, value) {
+                // If the model reference refers to the propery of an object (eg. "object.property")
+                if(~modelReference.indexOf('.')) {
+                    var parts = modelReference.split('.', 2);
+                    // Only set the value if that object already exists
+                    if(scope.hasOwnProperty(parts[0])) {
+                        scope[parts[0]][parts[1]] = value;
+                        return;
+                    }
+                }
+                scope[modelReference] = value;
+            };
+
+            /**
+             * The logic for our directive
+             * @param scope {{}}
+             * @param element {{}}
+             * @param attributes {{}}
+             */
+            var link = function(scope, element, attributes) {
+                elementScope = scope;
+                canvas = document.getElementById(attributes.inputFilePreview);
+                if(attributes.hasOwnProperty('mapToModel')) {
+                    mapToModel = attributes.mapToModel;
+                }
+                element.on('change', function(changeEvent) {
+                    var reader = new FileReader();
+                    reader.onload = readerOnLoad;
+                    reader.readAsDataURL(changeEvent.target.files[0]);
+                });
+            };
+
+            return {
+                restrict: 'A',
+                link: link
+            };
+</script>
+</head>
+<body>
+  
+</body>
+</html>

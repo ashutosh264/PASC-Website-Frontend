@@ -1,0 +1,65 @@
+<!-- <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+  <div class="inner-adjust">
+    <div class="pt-3 pb-2 mb-3 border-bottom">
+      <h1 class="h2">User Profile</h1>
+    </div>
+
+    <div class="row" *ngIf="authService.userData as user">
+      <div class="col-md-12">
+        <div class="media">
+          <img class="align-self-start mr-5 img-thumbnail rounded-circle"
+            src="{{ user.photoURL ? user.photoURL : '../../../../assets/images/avatar.png'}}" alt="" />
+          <div class="media-body">
+            <h1>
+              <strong>{{ user.displayName }}</strong>
+            </h1>
+            <p>
+              Email: <strong>{{ user.email }}</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main> -->
+<br><br>
+<div class="m-5"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <br><br><br>
+      <h1 class="h2">User Profile</h1>
+      <hr style="border: solid 1px ;">
+      <br><br>
+    </div>
+
+    <div class="justify-content-center">
+      <div class="row" *ngIf="authService.userData as user">
+
+        <div class="col-md-12">
+
+
+
+          <div class="card ">
+            <img class="" src=" {{ '../../../assets/images/avc/undraw_coding_6mjf.png'}}" alt="Profile Photo"
+              style="width:100%">
+            <br>
+            <h1>
+              <strong>{{ user.displayName }}</strong>
+            </h1>
+            <br>
+            <p>
+              Email: <strong>{{ user.email }}</strong>
+            </p>
+            <br>
+            <p> <span class="redirect" routerLink="/home"><button> Read Blogs</button></span></p>
+          </div>
+          <br><br><br>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
