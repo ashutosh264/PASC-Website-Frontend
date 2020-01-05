@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase : {
-    apiKey: "AIzaSyCL98Jbzx4xNf6j2XSBwTcFIyMv83F1GuE",
-    authDomain: "pasc-blogs.firebaseapp.com",
-    databaseURL: "https://pasc-blogs.firebaseio.com",
-    projectId: "pasc-blogs",
-    storageBucket: "pasc-blogs.appspot.com",
-    messagingSenderId: "181615956872",
-    appId: "1:181615956872:web:311848f57c507328eda03d",
-    measurementId: "G-V0DQR00S93"
+    apiKey: "AIzaSyBk2pZ0WFAvYHdwjoNGXFXIaSz0MKAaOIM",
+    authDomain: "pascblogs-54ff3.firebaseapp.com",
+    databaseURL: "https://pascblogs-54ff3.firebaseio.com",
+    projectId: "pascblogs-54ff3",
+    storageBucket: "pascblogs-54ff3.appspot.com",
+    messagingSenderId: "503881790645",
+    appId: "1:503881790645:web:0f1a4fff0424b7dc963afc",
+    measurementId: "G-F9V7KH4YDX"
   }
   
 };

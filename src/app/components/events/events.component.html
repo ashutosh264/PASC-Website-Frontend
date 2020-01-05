@@ -1,21 +1,32 @@
 <div class="m-5"></div>
 <div class="selfmargin">
-<section id="heading">
-  <div class="container hdAndText" style="text-align:left; ">
-  <h1 class="h1text">
-    Upcoming Events
-  </h1>
-  <div class="yellow_line">
 
-  </div>
-  </div>
-</section>
+  <section id="heading">
+    <div class="container hdAndText" style="text-align: left;">
+      <h1 class="h1text">EVENTS</h1>
+      <div class="yellow_line"></div>
+    </div>
+  </section>
+
 <section>
-  <ng-container *ngFor= "let upcoming of upcomings">
+  
+
   <div class="container">
+    
+    <div id="heading">
+      <div class="container hdAndText" style="text-align: center;">
+        <b>  <h3 class="h4text">UPCOMING EVENTS</h3></b>
+          <div class="yellow_line1"></div>
+      </div>
+  </div>
+  <br><br>
     <div class="row">
+
+     
+
+      <ng-container *ngFor= "let upcoming of upcomings">
       <div class="col-lg-3">
-        <div class="card">
+        <!-- <div class="card ">
         <div class="card-block">
           <h4 class="card-title"> {{upcoming.topic}} </h4>
         </div>
@@ -25,21 +36,38 @@
         </div>
         <small class="text-muted"> {{upcoming.date}} </small>
       </div>
+      </div> -->
+
+
+      <div class="card" >
+        <div class="card-body">
+          <h5 class="card-title">{{upcoming.topic}}</h5><br>
+          <h6 class="card-subtitle mb-2 text-muted">{{upcoming.date}} </h6><br>
+          <p class="card-text"> {{upcoming.description}}</p>
+          <br>
+        </div>
+      </div>
+
       </div>
    
-    
+    </ng-container>
   </div>
   </div>
-   </ng-container>
+   
+
 </section>
-<section id="heading">
-  <div class="container hdAndText" style="text-align: left;">
-    <h1 class="h1text">EVENTS</h1>
-    <div class="yellow_line"></div>
-  </div>
-</section>
+<br>
+<br>
+<br><br>
 
 <section>
+  <div id="heading">
+    <div class="container hdAndText" style="text-align: center;">
+      <b>  <h3 class="h4text">PAST EVENTS</h3></b>
+        <div class="yellow_line1"></div>
+    </div>
+</div>
+<br><br>
   <div class="container
    scr_table table-responsive" >
     <table class="table">
@@ -70,7 +98,7 @@
     <div class="row mt-xl-3 mx-xl-3" style="width: 100vw;">
       <div class="col-xl-5 d-none d-xl-inline mt-xl-5">
         <div class="pulzion mt-4 mt-xl-0 mx-3">
-          <div class="p-8">
+          <div class="p-8 text-center">
             <h2 class="myheading" style="text-align: center;">PULZION</h2>
             <p class="introText">
               Pulzion 2019 held on the 23th, 24th, 25th of August 2019,
@@ -79,6 +107,7 @@
               primarily for engineering students across Maharashtra was
               organized with the aim of promoting technology as a science as
               well as a profession.
+              <br><br> <a href="https://pict.acm.org/pulzion19/" style="align-self: center;">PULZION'19 Website</a>
             </p>
           </div>
         </div>
@@ -89,15 +118,16 @@
 
       <div class="col-xl-4 d-inline d-xl-none" data-aos="fade-up" data-aos-duration="1000">
         <div class="pulzion m-4 mt-xl-0 mx-3">
-          <div class="p-8">
+          <div class="p-8 text-center">
             <h2 class="myheading" style="text-align: center;">PULZION</h2>
             <p class="introText">
-              Pulzion 2019 held on the 17th, 18th, 19th of August 2018,
+              Pulzion 2019 held on the 23th, 24th, 25th of August 201p,
               witnessed a tremendous footfall of students from different places
               with a dream to excel and a passion to win. The event held
               primarily for engineering students across Maharashtra was
               organized with the aim of promoting technology as a science as
               well as a profession.
+              <br><br> <a href="https://pict.acm.org/pulzion19/" style="align-self: center;">PULZION'19 Website</a>
             </p>
           </div>
         </div>

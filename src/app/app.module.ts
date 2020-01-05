@@ -57,6 +57,7 @@ import { TableComponent } from './components/table/table.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { AdminFeedbackComponent } from './components/admin-feedback/admin-feedback.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AchieveComponent } from './components/achieve/achieve.component';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { FooterComponent } from './components/footer/footer.component';
     VerifyEmailComponent,
     TableComponent,
     AdminFeedbackComponent,
-    FooterComponent
+    FooterComponent,
+    AchieveComponent
   ],
   imports: [
     BrowserModule,

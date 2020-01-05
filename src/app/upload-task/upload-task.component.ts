@@ -12,12 +12,13 @@ import { finalize, tap } from 'rxjs/operators';
 export class UploadTaskComponent implements OnInit {
 
   @Input() file: File;
-
+  @Input() selected: number;
   task: AngularFireUploadTask;
 
   percentage: Observable<number>;
   snapshot: Observable<any>;
   downloadURL: string;
+  select: number;
 
   constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
 
@@ -43,9 +44,10 @@ export class UploadTaskComponent implements OnInit {
       tap(console.log),
       // The file's download URL
       finalize( async() =>  {
+        this.select= this.selected;
         this.downloadURL = await ref.getDownloadURL().toPromise();
 
-        this.db.collection('files').add( { downloadURL: this.downloadURL, path });
+        this.db.collection('files').add( { downloadURL: this.downloadURL, path , album: this.selected} );
       }),
     );
   }

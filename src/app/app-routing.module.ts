@@ -27,6 +27,7 @@ import { AdminVdetailsComponent } from './components/admin-vdetails/admin-vdetai
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import {TableComponent} from './components/table/table.component';
 import { AdminFeedbackComponent } from './components/admin-feedback/admin-feedback.component';
+import { AchieveComponent } from './components/achieve/achieve.component';
 
 
 
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path : 'domains', component : DomainsComponent },
   {path : 'team', component : TeamComponent },
   {path : 'aboutus', component : AboutusComponent },
+  {path : 'achieve', component : AchieveComponent },
   {path : 'blogs', component : BlogListComponent },
   {path : 'blogdetail/:id', component : BlogDetailComponent},
   {path : 'new', component : NewBlogComponent, canActivate : [AuthGuard] },
@@ -60,7 +62,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes , {scrollPositionRestoration: 'enabled'})  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

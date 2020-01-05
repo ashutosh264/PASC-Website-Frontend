@@ -19,6 +19,14 @@ body {
   background-color: #fff;
 }
 
+.btaa:hover{
+  background-color:rgb(26,58,120);
+  color: black;
+}
+.btaa{
+  font-size: 25px !important; background-color: #0ab1f0; padding: 10px 25px!important;border-radius: 25px 
+}
+
 body,
 html {
   font-family: "Open Sans", sans-serif;

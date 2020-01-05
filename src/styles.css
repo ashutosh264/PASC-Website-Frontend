@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
 
-
 html,
 body {
   height: 100%;
@@ -30,3 +29,17 @@ blockquote {
   overflow-y: scroll;
 }
 
+
+
+
+#loader {
+  bottom: 0;
+  height: 175px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 25%;
+  background-image: url('./assets/Preloader_2.gif');
+}

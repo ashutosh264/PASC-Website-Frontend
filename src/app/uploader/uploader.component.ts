@@ -18,6 +18,7 @@ export class UploaderComponent {
 
   files: File[] = [];
   currentUser : any ;
+  selected: number = 1;
 
   constructor(private storage: AngularFireStorage, private db: AngularFirestore ,  public angularFireAuth : AngularFireAuth,public router : Router) { }
 
@@ -29,6 +30,8 @@ export class UploaderComponent {
     }, 2000);
   }
 
+  
+
 
   toggleHover(event: boolean) {
     this.isHovering = event;
@@ -38,6 +41,11 @@ export class UploaderComponent {
     for (let i = 0; i < files.length; i++) {
       this.files.push(files.item(i));
     }
+  }
+
+  selectChangeHandler (event: any) {
+    //update the ui
+    this.selected = event.target.value;
   }
 
 

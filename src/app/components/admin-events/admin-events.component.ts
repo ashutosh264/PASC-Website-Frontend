@@ -33,9 +33,17 @@ export class AdminEventsComponent implements OnInit {
   currentUser : any
   ngOnInit() {
    
+    setTimeout(() => {
+      this.getAdmin()
+     
+    }, 2000);
     this.upcomingService.getEventFromFirestore().subscribe(item => {this.upcomings = item});
   }
 
- 
+  getAdmin()
+  {
+    this.db.doc(`users/${this.angularFireAuth.auth.currentUser.uid}`).valueChanges().subscribe(item => {this.currentUser = item})
+
+  }
 
 }

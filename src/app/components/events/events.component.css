@@ -352,3 +352,14 @@ a {
    margin-left:auto;
    margin-right:auto;
  }
+
+
+ h3:after {
+  display: block;
+  height: 3px;
+  background-color: rgb(253, 184, 17);
+  content: " ";
+  width: 10%;
+  margin: 0 auto;
+  margin-top: 5px;
+}

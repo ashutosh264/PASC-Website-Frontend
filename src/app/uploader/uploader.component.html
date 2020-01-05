@@ -1,5 +1,30 @@
 <br><br><br>
 <div *ngIf="currentUser.admin">
+  <br><br>
+
+  <div class="container">
+    <article>
+     
+      <h2><span>Select a Album:</span></h2>
+      <select (change)="selectChangeHandler($event)">
+          <option value="1">Pulzion</option>
+          <option value="2">Rad , Pascathon</option>
+          <option value="3">Hour of code</option>
+          <option value="4">ACM-W</option>
+          <option value="5">Coding Ninjas</option>
+          <option value="6">Sig</option>
+          <option value="7">Winter , DAta</option>
+      </select>
+      <p><span>You selected: </span><b>{{selected}}</b></p>
+  </article>
+  
+    <h3>Uploads</h3>
+  
+  </div>
+
+<br><br>
+
+
   <div class="dropzone" dropzone (hovered)="toggleHover($event)" (dropped)="onDrop($event)"
     [class.hovering]="isHovering">
 
@@ -8,10 +33,9 @@
     <p>Drag and Drop a File</p>
   </div>
 
-  <h3>Uploads</h3>
-
+  
   <div *ngFor="let file of files">
-    <upload-task [file]="file"></upload-task>
+    <upload-task [file]="file" [selected]="selected"></upload-task>
   </div>
 </div>
 

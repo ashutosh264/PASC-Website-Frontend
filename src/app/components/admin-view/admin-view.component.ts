@@ -30,6 +30,10 @@ export class AdminViewComponent implements OnInit {
 currentUser:any;
 
   ngOnInit() {
+    setTimeout(() => {
+      this.getAdmin()
+     
+    }, 1000);
    
   }
 
@@ -48,5 +52,11 @@ currentUser:any;
     },3000);
   }
  
+  getAdmin()
+  {
+    this.afs.doc(`users/${this.angularFireAuth.auth.currentUser.uid}`).valueChanges().subscribe(item => {this.currentUser = item})
+
+  }
+  
 
 }

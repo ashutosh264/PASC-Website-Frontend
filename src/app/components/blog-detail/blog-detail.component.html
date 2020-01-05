@@ -1,6 +1,7 @@
 <div class="m-5"></div>
 <div class="m-5"></div>
-<div class="container" style="padding: 6rem;">
+<br><br><br><br>
+<div class="container" >
   <h1 class="heading">{{ blog.heading }}</h1>
   <h4 class="font-weight-light text-muted">{{ blog.subHeading }}</h4>
   <h4 class="font-weight-medium" style="margin: 10px 0;">
@@ -11,10 +12,10 @@
       blog.category
     }}</span>
   </div>
-  <img src="{{ blog.image }}" alt="" class="img-fluid" />
+  <img src="{{ blog.image }}" alt="" class="img-fluid" style="width: 80%;"/>
   <div class="lead e2e-trusted-url" [innerHTML]="blog.content | keepHtml"></div>
 
-  <div *ngIf="!blog.approve && currentUser.admin">
+  <div *ngIf="!blog.approve ">
     <button class="btn btn-primary m-2" (click)="markCompleted(blog.id)">
       Accept
     </button>
