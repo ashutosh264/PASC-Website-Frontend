@@ -9,6 +9,7 @@ import { AngularFirestore, AngularFirestoreDocument} from 'angularfire2/firestor
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs'
+import { UpcomingService } from 'src/app/services/upcoming.service';
 
 @Component({
   selector: 'app-admin-vdetails',
@@ -16,43 +17,42 @@ import { Observable } from 'rxjs'
   styleUrls: ['./admin-vdetails.component.css']
 })
 export class AdminVdetailsComponent implements OnInit {
-  exampleForm: FormGroup;
-  item: any;
-
-  validation_messages = {
-    'topic': [
-      {type: 'required',message:'topic is required'},
-    ],
-    'date' : [
-      {type: 'required',message:'date is required'}
-    ],
-    'description': [
-      {type: 'required',message:'description is required'}
-    ],
-    'venue' : [
-      {type: 'required',message:'venue is required'}
-    ]
-  }
-
+  upcoming: any;
   constructor(
     public eventService: EventService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
     public dialog: MatDialog,
-    public afs: AngularFirestore,public authService : AuthService, public angularFireAuth : AngularFireAuth
+    public afs: AngularFirestore,public authService : AuthService, public angularFireAuth : AngularFireAuth,
+    public upcomingService: UpcomingService
   ) { }
 
 
   currentUser : any
 
   ngOnInit() {
+    const id = this.route.snapshot.params['id'];
+    this.upcoming = this.upcomingService.getSelectedEvents(id).subscribe(data => this.upcoming = data);
+    this.upcomingService.provideId(id);
 
-  
-          
+    setTimeout(() => {
+      this.getAdmin()
+     
+    }, 1000);
+
 
   }
 
+  deleteEvent(id) {
+    this.upcomingService.delete(id);
+  }
+
+  getAdmin()
+  {
+    this.afs.doc(`users/${this.angularFireAuth.auth.currentUser.uid}`).valueChanges().subscribe(item => {this.currentUser = item})
+
+  }
   
 
 }

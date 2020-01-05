@@ -41,5 +41,23 @@ export class UpcomingService {
       this.itemsCollection.add(data);
     }
 
+    provideId(id : string)
+    {
+      this.itemDoc = this.db.doc<Upcoming>('events/' + id);
+      this.itemDoc.update({id : id})
+    }
+
+    getSelectedEvents(id : string){
+      this.itemDoc = this.db.doc<Upcoming>(`events/${id}`);
+      return this.itemDoc.valueChanges()
+    }
+
+
+    delete(id : string)
+    {
+      this.itemDoc = this.db.doc<Upcoming>(`events/${id}`);
+      this.itemDoc.delete();
+      this.router.navigate(['events']);
+    }
     
 }

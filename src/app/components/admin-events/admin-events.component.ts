@@ -10,6 +10,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs'
 import { AngularFireStorage } from 'angularfire2/storage';
 import { UpcomingService } from 'src/app/services/upcoming.service';
+import { Upcoming } from 'src/app/shared/events';
 
 @Component({
   selector: 'app-admin-events',
@@ -17,8 +18,9 @@ import { UpcomingService } from 'src/app/services/upcoming.service';
   styleUrls: ['./admin-events.component.css']
 })
 export class AdminEventsComponent implements OnInit {
-  topic: string;
-  description: string;
+  upcomings: Upcoming[];
+  upcoming: Upcoming;
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -31,9 +33,7 @@ export class AdminEventsComponent implements OnInit {
   currentUser : any
   ngOnInit() {
    
-    const id = this.route.snapshot.params['id'];
-   
-   
+    this.upcomingService.getEventFromFirestore().subscribe(item => {this.upcomings = item});
   }
 
  

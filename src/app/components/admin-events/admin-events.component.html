@@ -1,0 +1,30 @@
+<br><br><br>
+
+<nav class="navbar navbar-light bg-info">
+    <span class="navbar-brand mb-0 h1">Admin Panel</span>
+    <ul class="nav justify-content-end">
+            <li class="nav-item">
+                    <a class="nav-link text-danger" routerLink = '/adminevents'>New Event</a>
+                  </li>
+    </ul>
+  </nav>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="grid-container">
+<div *ngFor = "let upcoming of upcomings" >
+<div class="card" [routerLink] = "['/adminDetails', upcoming.id]" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{upcoming.topic}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted"> {{upcoming.date }} </h6>
+      <p class="card-text"> {{upcoming.description}} </p>
+    </div>
+    
+  </div>
+  <br><br>
+</div>
+</div>
+
+
