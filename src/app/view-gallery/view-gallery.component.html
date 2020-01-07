@@ -169,10 +169,11 @@
 
         <div id="heading">
             <div class="container hdAndText" style="text-align: center;">
-              <b>  <h3 class="h4text">Winter Coding Sphere And Data Quest</h3></b>
+              <b>  <h3 class="h4text">Winter Coding Spree And Data Quest</h3></b>
                 <div class="yellow_line1"></div>
             </div>
         </div>
+        
         <br><br>
         <div class="row photos " >
             
@@ -187,7 +188,28 @@
             </ng-container>
 
         </div>
+        <br><br>
 
+        <div id="heading">
+            <div class="container hdAndText" style="text-align: center;">
+              <b>  <h3 class="h4text"> Eminent Speaker Program </h3></b>
+                <div class="yellow_line1"></div>
+            </div>
+        </div>
+        <br><br>
+        <div class="row photos " >
+            
+
+            <ng-container *ngFor="let item of items" >
+
+                
+                <div class="col-sm-6 col-md-4  item item1 fix" *ngIf=" item.album == 8"><a href="{{item.downloadURL  }}"
+                        data-lightbox="photos"><img class="img-fluid" src="{{item.downloadURL  }}"></a>
+                </div>
+                
+            </ng-container>
+
+        </div>
 
     </div>
 </div>

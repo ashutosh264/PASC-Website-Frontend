@@ -28,10 +28,6 @@ export class BlogDetailComponent implements OnInit {
     this.blog = this.blogService.getSelectedBlogFromFirestore(id).subscribe(data => this.blog = data);
     this.blogService.provideId(id);
 
-    setTimeout(() => {
-      this.getAdmin()
-     
-    }, 1000);
 
   }
   markCompleted(id : string) {
@@ -41,10 +37,6 @@ export class BlogDetailComponent implements OnInit {
     this.blogService.delete(id);
   }
 
-  getAdmin()
-  {
-    this.afs.doc(`users/${this.angularFireAuth.auth.currentUser.uid}`).valueChanges().subscribe(item => {this.currentUser = item})
-
-  }
+ 
   
 }
