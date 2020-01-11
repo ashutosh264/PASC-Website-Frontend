@@ -3,6 +3,7 @@ import { Renderer2, Inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/common';
 import {ElementRef} from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 
 
@@ -17,12 +18,14 @@ export class LoginComponent implements OnInit {
   authError : any;
   clicked = false;
  
-  constructor(public authService : AuthService, private elementRef:ElementRef)  { }
+  constructor(public authService : AuthService, private elementRef:ElementRef ,  private titleService: Title)  { }
 
   ngOnInit() {
     
     this.authService.eventAuthError$.subscribe( data => {
       this.authError = data;
+
+      this.titleService.setTitle("Login");
     })
     // this.clicked=false;
     // var s = document.createElement("script");

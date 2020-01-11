@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import * as firebase from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
@@ -14,11 +14,18 @@ import {Title, Meta} from '@angular/platform-browser';
   templateUrl: './main-navbar.component.html',
   styleUrls: ['./main-navbar.component.css']
 })
+
 export class MainNavbarComponent implements OnInit {
+  
+  item: any;
+
+
 
   User;
   currentUser : any
-  item: any;
+  
+ 
+
   constructor(public authService : AuthService, public angularFireAuth : AngularFireAuth, public afs: AngularFirestore,
     private titleService: Title,
     private meta: Meta ) { }
@@ -48,6 +55,7 @@ export class MainNavbarComponent implements OnInit {
   getCurrent() {
     this.afs.doc(`users/${this.angularFireAuth.auth.currentUser.uid}`).valueChanges().subscribe(item => {this.currentUser = item})
   }
+
 
 
 }
