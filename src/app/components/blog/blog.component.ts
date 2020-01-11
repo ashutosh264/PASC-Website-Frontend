@@ -19,7 +19,7 @@ export class BlogComponent implements OnInit {
   s1.type = "text/javascript";
   s1.src = "../../../assets/scripts/AOS.js";
   this.elementRef.nativeElement.appendChild(s1);
-  this.titleService.setTitle(this.blog.heading);
+  this.titleService.setTitle("Blogs");
 
   }
 

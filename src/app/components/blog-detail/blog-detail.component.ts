@@ -26,11 +26,16 @@ export class BlogDetailComponent implements OnInit {
     private titleService: Title) { }
 
   ngOnInit() {
+ 
     const id = this.route.snapshot.params['id'];
     this.blog = this.blogService.getSelectedBlogFromFirestore(id).subscribe(data => this.blog = data);
     this.blogService.provideId(id);
 
-    
+    setTimeout(() => {
+      this.titleService.setTitle(this.blog.heading);
+    }, 2000);
+   
+
 
   }
   markCompleted(id : string) {
