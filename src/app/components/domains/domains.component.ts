@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import $ from 'jquery';
 import { ElementRef } from "@angular/core";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-domains',
@@ -9,7 +10,10 @@ import { ElementRef } from "@angular/core";
 })
 export class DomainsComponent implements OnInit {
 
-  constructor(private elementRef: ElementRef) { }
+  title = 'Domains'
+
+  constructor(private elementRef: ElementRef,
+    private titleService: Title) { }
 
   ngOnInit() {
     $(function () {
@@ -46,6 +50,9 @@ export class DomainsComponent implements OnInit {
     s.type = "text/javascript";
     s.src = "../../../assets/scripts/AOS.js";
     this.elementRef.nativeElement.appendChild(s);
+
+
+    this.titleService.setTitle(this.title);
   }
 }
 

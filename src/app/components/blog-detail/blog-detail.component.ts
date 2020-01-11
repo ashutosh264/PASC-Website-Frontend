@@ -7,6 +7,7 @@ import { AngularFirestore, AngularFirestoreDocument} from 'angularfire2/firestor
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs'
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -21,13 +22,15 @@ export class BlogDetailComponent implements OnInit {
   constructor(private blogService : BlogService, 
     private route : ActivatedRoute,
     private location : Location,
-    public afs: AngularFirestore,public authService : AuthService, public angularFireAuth : AngularFireAuth) { }
+    public afs: AngularFirestore,public authService : AuthService, public angularFireAuth : AngularFireAuth,
+    private titleService: Title) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
     this.blog = this.blogService.getSelectedBlogFromFirestore(id).subscribe(data => this.blog = data);
     this.blogService.provideId(id);
 
+    
 
   }
   markCompleted(id : string) {

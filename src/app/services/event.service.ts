@@ -22,13 +22,12 @@ export class EventService {
     public db: AngularFirestore,
     public router : Router
   ) {
-    this.itemsCollection = this.db.collection('event',ref=> ref.orderBy("date","desc"))
-
+    this.itemsCollection = this.db.collection('event',ref=> ref.orderBy("datep","desc"))
 
    }
 
   getEventsFromFirestore() {
-    this.items = this.db.collection('event',ref => ref.orderBy("date","desc")).snapshotChanges().pipe(
+    this.items = this.db.collection('event',ref => ref.orderBy("datep","desc")).snapshotChanges().pipe(
       map(changes => {
         return changes.map(a=> {
           const data = a.payload.doc.data() as Event

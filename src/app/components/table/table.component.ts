@@ -10,6 +10,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-table',
@@ -23,6 +24,7 @@ export class TableComponent implements OnInit {
   attendees: number;
   details:string;
   speaker: string;
+  datep: string;
   created: boolean;
 
   constructor(
@@ -44,6 +46,7 @@ export class TableComponent implements OnInit {
       attendees: this.attendees,
       details: this.details,
       speaker: this.speaker,
+      datep: this.datep,
     };
 
     this.created = true;

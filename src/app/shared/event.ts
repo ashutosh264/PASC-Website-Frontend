@@ -5,4 +5,5 @@ export class Event {
      attendees: number;
      details:string;
      speaker: string;
+     datep: string;
 }

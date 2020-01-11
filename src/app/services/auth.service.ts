@@ -186,4 +186,5 @@ User;
     this.logout().then(() => this.router.navigate(['/home']) );
   }
 
+  
 }

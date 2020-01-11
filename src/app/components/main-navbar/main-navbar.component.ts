@@ -7,6 +7,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { Blog } from 'src/app/shared/blog';
 import { Observable } from 'rxjs'
 import $ from 'jquery';
+import {Title, Meta} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-main-navbar',
@@ -18,7 +19,9 @@ export class MainNavbarComponent implements OnInit {
   User;
   currentUser : any
   item: any;
-  constructor(public authService : AuthService, public angularFireAuth : AngularFireAuth, public afs: AngularFirestore) { }
+  constructor(public authService : AuthService, public angularFireAuth : AngularFireAuth, public afs: AngularFirestore,
+    private titleService: Title,
+    private meta: Meta ) { }
 
   ngOnInit() {
 
@@ -45,5 +48,6 @@ export class MainNavbarComponent implements OnInit {
   getCurrent() {
     this.afs.doc(`users/${this.angularFireAuth.auth.currentUser.uid}`).valueChanges().subscribe(item => {this.currentUser = item})
   }
+
 
 }

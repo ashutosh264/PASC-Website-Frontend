@@ -58,6 +58,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 import { AdminFeedbackComponent } from './components/admin-feedback/admin-feedback.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AchieveComponent } from './components/achieve/achieve.component';
+import { OrderPipe } from 'ngx-order-pipe';
 
 
 @NgModule({
@@ -94,7 +95,8 @@ import { AchieveComponent } from './components/achieve/achieve.component';
     TableComponent,
     AdminFeedbackComponent,
     FooterComponent,
-    AchieveComponent
+    AchieveComponent,
+    OrderPipe
   ],
   imports: [
     BrowserModule,

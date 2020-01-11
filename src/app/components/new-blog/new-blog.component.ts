@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { AuthService } from '../../services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -14,6 +15,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./new-blog.component.css']
 })
 export class NewBlogComponent implements OnInit {
+
+  title = 'New-Blog'
+
   heading : string;
   subHeading : string;
   image : string = 'https://firebasestorage.googleapis.com/v0/b/pasc-blogs.appspot.com/o/posts%2Fdemo-detail.jpeg?alt=media&token=3ff60e63-8eef-4b67-bee5-089b0b7e83da';
@@ -23,9 +27,12 @@ export class NewBlogComponent implements OnInit {
   created : boolean;
   category : string;
   public Editor = ClassicEditor;
-  constructor(private blogService : BlogService, private storage : AngularFireStorage,public authService : AuthService , public router : Router) { }
+  constructor(private blogService : BlogService, private storage : AngularFireStorage,public authService : AuthService , public router : Router,
+    private titleService: Title) { }
 
   ngOnInit() {
+
+    this.titleService.setTitle(this.title);
   }
   createPost()
   {

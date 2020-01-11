@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Blog } from 'src/app/shared/blog';
 import { ElementRef } from "@angular/core";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-blog',
@@ -10,13 +11,18 @@ import { ElementRef } from "@angular/core";
 export class BlogComponent implements OnInit {
   @Input()
   blog: Blog;
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef,
+    private titleService: Title) { }
 
   ngOnInit() {
     var s1 = document.createElement("script");
   s1.type = "text/javascript";
   s1.src = "../../../assets/scripts/AOS.js";
   this.elementRef.nativeElement.appendChild(s1);
+  this.titleService.setTitle(this.blog.heading);
+
   }
+
+  
 
 }

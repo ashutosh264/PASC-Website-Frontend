@@ -4,6 +4,7 @@ import { ElementRef } from "@angular/core";
 import { EventService } from '../../services/event.service';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 import $ from "jquery";
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "app-home",
@@ -11,14 +12,20 @@ import $ from "jquery";
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
+  
+  title = 'HomePage';
 
   items: any = [];
 
   constructor(private elementRef: ElementRef, public eventService: EventService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private titleService: Title) { }
 
   ngOnInit() {
+
+    this.titleService.setTitle(this.title);
+
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = "../../../assets/scripts/AOS.js";

@@ -9,7 +9,11 @@
 
   <div>
     <mat-form-field>
-    <input matInput placeholder="Date (dd/mm/yyyy)" [(ngModel)] = "date" class="input-field" >
+    <input matInput placeholder="Date (month date, Year)" [(ngModel)] = "date" class="input-field" >
+  </mat-form-field>
+  <mat-form-field>
+    <input [matDatepicker]="myDatepicker" placeholder="Date(update in calender)" [(ngModel)] = "datep" >
+<mat-datepicker #myDatepicker></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
       <input matInput placeholder="Activity" [(ngModel)] = "activity" class="input-field" >

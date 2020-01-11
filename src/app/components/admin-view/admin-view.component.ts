@@ -18,6 +18,7 @@ export class AdminViewComponent implements OnInit {
   topic: string;
   description: string;
   date: string;
+  datep: string;
   created: boolean;
 
   constructor(
@@ -41,7 +42,8 @@ currentUser:any;
     const data = {
       topic: this.topic,
       date: this.date,
-      description: this.description
+      description: this.description,
+      datep: this.datep
     };
 
     this.created= true;

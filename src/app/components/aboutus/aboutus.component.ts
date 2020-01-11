@@ -6,6 +6,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 export interface FormModel {
   captcha?: string;
@@ -19,6 +20,8 @@ export interface FormModel {
 })
 export class AboutusComponent implements OnInit {
 
+  title= 'About Us';
+
   name : string;
   email : string;
   subject: string;
@@ -26,7 +29,8 @@ export class AboutusComponent implements OnInit {
 
   public formModel: FormModel = {};
 
-  constructor(private blogService : BlogService, private storage : AngularFireStorage,public authService : AuthService , public router : Router , private elementRef:ElementRef) { }
+  constructor(private blogService : BlogService, private storage : AngularFireStorage,public authService : AuthService , public router : Router , private elementRef:ElementRef,
+    private titleService: Title) { }
 
 
 
@@ -35,6 +39,8 @@ export class AboutusComponent implements OnInit {
   s.type = "text/javascript";
   s.src = "../../../assets/scripts/AOS.js";
   this.elementRef.nativeElement.appendChild(s);
+
+  this.titleService.setTitle(this.title);
   }
 
   createFeed()

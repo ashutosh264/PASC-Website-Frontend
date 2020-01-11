@@ -31,6 +31,7 @@ import { AchieveComponent } from './components/achieve/achieve.component';
 
 
 
+
 const routes: Routes = [
   {path : 'home', component : HomeComponent },
   {path : 'events', component : EventsComponent },

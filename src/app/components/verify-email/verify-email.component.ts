@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-verify-email',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerifyEmailComponent implements OnInit {
 
-  constructor() { }
+  title = 'Verify Email'
+
+  constructor(private titleService: Title) { }
 
   ngOnInit() {
+
+    this.titleService.setTitle(this.title);
+
+
   }
 
 }

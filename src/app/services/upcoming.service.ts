@@ -24,7 +24,7 @@ export class UpcomingService {
      }
 
      getEventFromFirestore() {
-      this.items = this.db.collection('events',ref => ref.orderBy("date","desc")).snapshotChanges().pipe(
+      this.items = this.db.collection('events',ref => ref.orderBy('date')).snapshotChanges().pipe(
         map(changes => {
           return changes.map(a=> {
             const data = a.payload.doc.data() as Upcoming
