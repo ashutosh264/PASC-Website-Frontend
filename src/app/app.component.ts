@@ -15,5 +15,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle(this.title);
+
+    this.meta.updateTag({name: 'keywords', content: 'PICT ACM Student Chapter' });
+    this.meta.updateTag({name: 'description',content:'PICT ACM Student Chapter is a dynamic body of over 300 highly motivated registered members and over 1000 active contributors.'});
+    this.meta.addTag({name: 'author', content:'PASC WEB Team'})
   }
 }
