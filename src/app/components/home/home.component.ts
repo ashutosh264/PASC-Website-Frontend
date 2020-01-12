@@ -13,7 +13,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class HomeComponent implements OnInit {
   
-  title = 'HomePage';
+  title = 'PASC-PICT ACM Student chapter';
 
   items: any = [];
 
