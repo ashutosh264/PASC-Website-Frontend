@@ -1,7 +1,7 @@
-<div class="card" [routerLink]="['/blogdetail', blog.id]" data-aos="zoom-in"  data-aos-duration="2000" >
+<div class="card" [routerLink]="['/blogdetail', blog._id]" data-aos="zoom-in"  data-aos-duration="2000" >
     <img src="{{blog.image}}" class="card-img-top" alt="..." >
     <div class="card-body">
-    <h5 class="card-title heading" [routerLink]="['/blogdetail', blog.id]">{{blog.heading | slice:0:57 }}...</h5>
+    <h5 class="card-title heading" [routerLink]="['/blogdetail', blog._id]">{{blog.heading | slice:0:57 }}...</h5>
     <p class="card-text sub-heading">{{blog.subHeading | slice:0:75 }}...</p>
     <p class="card-text author">- {{blog.author}}</p>
     <p class="card-text date">{{blog.date | date}}</p>

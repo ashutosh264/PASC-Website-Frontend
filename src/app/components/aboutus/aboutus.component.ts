@@ -46,7 +46,7 @@ export class AboutusComponent implements OnInit {
   
   }
 
-  createFeed()
+  async createFeed()
   {
     const data = {
       name : this.name,
@@ -54,11 +54,12 @@ export class AboutusComponent implements OnInit {
       subject : this.subject,
       text : this.text
     };
-
-    this.blogService.createfeed(data)
+    console.log(data);
+    let a = this.blogService.createFeed(data).subscribe();
+    console.log(a);
     setTimeout(() => {
       window.alert("Feedback Received")
-      window.location.href="/aboutus"
+      window.location.href="/"
     }, 1000);
   }
 
