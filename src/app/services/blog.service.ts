@@ -1,107 +1,178 @@
-import { Injectable } from '@angular/core';
-import { Blog } from '../shared/blog';
-import { BLOGS } from '../shared/blogsData';
+import { Injectable } from "@angular/core";
+import { Blog } from "../shared/blog";
+import { BLOGS } from "../shared/blogsData";
+import { HttpClient } from "@angular/common/http";
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from "angularfire2/firestore";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { Router } from "@angular/router";
+import { HttpHeaders } from "@angular/common/http";
+import {environment} from '../../environments/environment';
 
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json"
+  })
+};
+const httpAdminOptions = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json"
+  })
+};
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class BlogService {
-  itemsCollection : AngularFirestoreCollection<Blog>
-  items : Observable<Blog[]>
-  itemDoc : AngularFirestoreDocument<Blog>
-  Galleryitems : any 
-  approveBlog : AngularFirestoreDocument<Blog>
+  itemsCollection: AngularFirestoreCollection<Blog>;
+  items: Observable<Blog[]>;
+  itemDoc: AngularFirestoreDocument<Blog>;
+  Galleryitems: any;
   feedback: any;
+  // api = "http://localhost:3000";
+  api = environment.port;
+  constructor(
+    public afs: AngularFirestore,
+    public router: Router,
+    private http: HttpClient
+  ) {}
 
-  getBlogs(): Blog[]{
-    return BLOGS;
+
+  getBlogs() {
+    return this.http.get(`${this.api}/api/blogs`);
   }
-  getSelectedBlog(id : string):Blog {
-    return BLOGS.filter((blog) => (blog.id === id))[0];
+  getSelectedBlog(id: string) {
+    return this.http.get(`${this.api}/api/blogs/blogdetails/${id}`);
   }
-  constructor(public afs: AngularFirestore, public router : Router) { 
-      this.itemsCollection = this.afs.collection('blogs', ref => ref.where("approve" , "==", true).orderBy("date", "desc"))
+  getAdminBlog() {
+    return this.http.get<Blog[]>(`${this.api}/api/blogs/reviewblogs`);
   }
+  addBlog(data: Blog) {
+    return this.http.post(`${this.api}/api/blogs/new`, data, httpOptions);
+  }
+  approveBlog(id: string) {
+    return this.http.put(
+      `${this.api}/api/blogs/reviewblogs/approve/${id}`,
+      httpAdminOptions
+    );
+  }
+  deleteBlog(id: string) {
+    return this.http.delete(
+      `${this.api}/api/blogs/admin/delete/${id}`,
+      httpAdminOptions
+    );
+  }
+  createFeed(feed) {
+    return this.http.post(`${this.api}/feedback/aboutus`, feed, httpOptions);
+  }
+  getFeed() {
+    return this.http.get(`${this.api}/feedback/feedback`);
+  }
+  uploadImage(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.api}/thumbnail/upload`, formData, {
+      headers: {
+        "Content-Type": file.type
+      }
+    });
+  }
+
+
+
+
+
+
+
+
+  
   getBlogsFromFirestore() {
-    this.items = this.afs.collection('blogs', ref => ref.orderBy("date", "desc")).snapshotChanges().pipe(map( changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as Blog
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }))
-    return this.items
+    this.items = this.afs
+      .collection("blogs", ref => ref.orderBy("date", "desc"))
+      .snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(a => {
+            const data = a.payload.doc.data() as Blog;
+            data.id = a.payload.doc.id;
+            return data;
+          });
+        })
+      );
+    return this.items;
   }
   getAdminBlogsFromFirestore() {
-    this.items = this.afs.collection('blogs').snapshotChanges().pipe(map( changes => {
-      return changes.map(a => {
-        const data = a.payload.doc.data() as Blog
-        data.id = a.payload.doc.id;
-        
-        if(!data.approve)
-        {
-          return data;
-        }
-      })
-    }))
-    return this.items
+    this.items = this.afs
+      .collection("blogs")
+      .snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(a => {
+            const data = a.payload.doc.data() as Blog;
+            data.id = a.payload.doc.id;
+
+            if (!data.approve) {
+              return data;
+            }
+          });
+        })
+      );
+    return this.items;
   }
-  getSelectedBlogFromFirestore(id : string){
+  getSelectedBlogFromFirestore(id: string) {
     this.itemDoc = this.afs.doc<Blog>(`blogs/${id}`);
-    return this.itemDoc.valueChanges()
+    return this.itemDoc.valueChanges();
   }
-  create(data : Blog) {
-     this.itemsCollection.add(data)
+  create(data: Blog) {
+    this.itemsCollection.add(data);
   }
 
   createfeed(value) {
-    return this.afs.collection('feedback').add({
+    return this.afs.collection("feedback").add({
       name: value.name,
       subject: value.subject,
       email: value.email,
       text: value.text
-    })
- }
+    });
+  }
 
+  getFeedback() {
+    return this.afs
+      .collection("feedback")
+      .snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(a => {
+            const data = a.payload.doc.data() as any;
+            data.id = a.payload.doc.id;
+            return data;
+          });
+        })
+      );
 
- getFeedback() {
-  return this.afs.collection('feedback').snapshotChanges().pipe(
-    map(changes => {
-      return changes.map(a => {
-          const data = a.payload.doc.data() as any;
-          data.id = a.payload.doc.id;
-          return data;
-        });
-      })
-  );
-
-  return this.items
-}
+    return this.items;
+  }
 
   getImages() {
-    this.Galleryitems = this.afs.collection('files').valueChanges()
+    this.Galleryitems = this.afs.collection("files").valueChanges();
     return this.Galleryitems;
   }
-  approve(id :string)
-  {
+  approve(id: string) {
     this.itemDoc = this.afs.doc<Blog>(`blogs/${id}`);
-    this.itemDoc.update({approve : true})
+    this.itemDoc.update({ approve: true });
   }
-  delete(id : string)
-  {
+  delete(id: string) {
     this.itemDoc = this.afs.doc<Blog>(`blogs/${id}`);
     this.itemDoc.delete();
-    this.router.navigate(['reviewblogs']);
+    this.router.navigate(["reviewblogs"]);
   }
-  provideId(id : string)
-  {
-    this.itemDoc = this.afs.doc<Blog>('blogs/' + id);
-    this.itemDoc.update({id : id})
+  provideId(id: string) {
+    this.itemDoc = this.afs.doc<Blog>("blogs/" + id);
+    this.itemDoc.update({ id: id });
   }
 }

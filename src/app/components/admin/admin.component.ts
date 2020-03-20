@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
   currentUser : any
   item: any;
   ngOnInit() {
-    this.blogService.getBlogsFromFirestore().subscribe(item => {this.blogs = item})
+    this.blogService.getAdminBlog().subscribe(item => {this.blogs = item})
     setTimeout(() => {
       this.getAdmin()
     }, 2000);

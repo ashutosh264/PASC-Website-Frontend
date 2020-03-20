@@ -60,6 +60,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AchieveComponent } from './components/achieve/achieve.component';
 
 
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -99,6 +102,7 @@ import { AchieveComponent } from './components/achieve/achieve.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase, 'angularfs'),

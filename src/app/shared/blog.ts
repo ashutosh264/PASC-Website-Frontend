@@ -4,7 +4,7 @@ export class Blog {
     subHeading : string;
     image : string;
     category ?: string;
-    author : string;
+    author ?: Object;
     likes ?: number;
     date : string;
     content : string;

@@ -27,6 +27,7 @@
   <div [hidden]="!created">
     <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
   </div>
+  <div *ngIf="!valid">Not Valid</div>
   <button mat-raised-button color="blue" class="btn btn-primary m-4" (click)="createPost()"
-    [disabled]="!heading || !subHeading || !content">Create Post</button>
+    [disabled]="!heading || !subHeading || !content || !category">Create Post</button>
 </div>

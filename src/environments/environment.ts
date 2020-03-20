@@ -1,7 +1,6 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
 export const environment = {
   production: false,
   firebase : {
@@ -13,8 +12,8 @@ export const environment = {
     messagingSenderId: "503881790645",
     appId: "1:503881790645:web:0f1a4fff0424b7dc963afc",
     measurementId: "G-F9V7KH4YDX"
-  }
-  
+  },
+  port : "https://pasc-node-app.herokuapp.com"
 };
 
 /*
