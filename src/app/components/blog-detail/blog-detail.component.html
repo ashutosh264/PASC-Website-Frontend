@@ -2,7 +2,7 @@
   <div class="m-5"></div>
   <div class="m-5"></div>
   <br /><br /><br /><br />
-  <div *ngIf="blog">
+  <div *ngIf="blog.heading">
     <h1 class="heading">{{ blog.heading }}</h1>
     <h4 class="font-weight-light text-muted">{{ blog.subHeading }}</h4>
     <h4 class="font-weight-medium" style="margin: 10px 0;">
@@ -29,7 +29,7 @@
       </div>
     </div>
   </div>
-  <div [hidden]="blog" class="text-center" style="margin:0 auto;">
+  <div [hidden]="blog.heading" class="text-center spinner-margin">
     <mat-spinner mode="indeterminate"></mat-spinner>
   </div>
 </div>

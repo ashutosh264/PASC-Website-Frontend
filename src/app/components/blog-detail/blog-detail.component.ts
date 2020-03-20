@@ -10,7 +10,7 @@ import { Title } from "@angular/platform-browser";
   styleUrls: ["./blog-detail.component.css"]
 })
 export class BlogDetailComponent implements OnInit {
-  blog = null;
+  blog;
   currentUser: any;
   admin :boolean = true;
 
@@ -24,6 +24,7 @@ export class BlogDetailComponent implements OnInit {
     const id = this.route.snapshot.params["id"];
     this.blog = this.blogService.getSelectedBlog(id).subscribe(data => {
       this.blog = data;
+      console.log('data fethced');
       this.titleService.setTitle(this.blog.heading);
     });
   }
