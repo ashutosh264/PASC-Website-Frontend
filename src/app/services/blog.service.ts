@@ -11,6 +11,8 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { HttpHeaders } from "@angular/common/http";
+import {environment} from '../../environments/environment';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -32,12 +34,15 @@ export class BlogService {
   itemDoc: AngularFirestoreDocument<Blog>;
   Galleryitems: any;
   feedback: any;
-  api = "http://localhost:3000";
+  // api = "http://localhost:3000";
+  api = environment.port;
   constructor(
     public afs: AngularFirestore,
     public router: Router,
     private http: HttpClient
   ) {}
+
+
   getBlogs() {
     return this.http.get(`${this.api}/api/blogs`);
   }
