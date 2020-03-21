@@ -6,6 +6,10 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs'
 import { BlogService } from '../../services/blog.service'
 import { Router } from '@angular/router';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
+
+const helper = new JwtHelperService();
 
 @Component({
   selector: 'app-admin',
@@ -18,11 +22,16 @@ export class AdminComponent implements OnInit {
   User;
   currentUser : any
   item: any;
+  token
   ngOnInit() {
+   
+     this.token = this.authService.loadToken()
+    this.currentUser = helper.decodeToken(this.token);
+
     this.blogService.getAdminBlog().subscribe(item => {this.blogs = item})
-    setTimeout(() => {
-      this.getAdmin()
-    }, 2000);
+    // setTimeout(() => {
+    //   this.getAdmin()
+    // }, 2000);
   }
 
   getAdmin()

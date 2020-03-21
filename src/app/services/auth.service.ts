@@ -93,8 +93,6 @@ islogin(){
 }
 
 
-
-
 loadToken(){
   const token = localStorage.getItem('idToken')
   this.authToken = token

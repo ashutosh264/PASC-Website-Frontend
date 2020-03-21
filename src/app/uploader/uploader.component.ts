@@ -5,7 +5,11 @@ import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
+
+const helper = new JwtHelperService();
 
 @Component({
   selector: 'uploader',
@@ -20,14 +24,18 @@ export class UploaderComponent {
   currentUser : any ;
   selected: number = 1;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore ,  public angularFireAuth : AngularFireAuth,public router : Router) { }
-
-
+  constructor(private storage: AngularFireStorage,
+     private db: AngularFirestore , public authService:AuthService,  
+     public angularFireAuth : AngularFireAuth,public router : Router) { }
+  token;
   ngOnInit() {
+  
+    this.token = this.authService.loadToken()
+    this.currentUser = helper.decodeToken(this.token);
    
-    setTimeout(() => {
-      this.getAdmin()
-    }, 2000);
+    // setTimeout(() => {
+    //   this.getAdmin()
+    // }, 2000);
   }
 
   

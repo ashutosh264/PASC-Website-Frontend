@@ -27,13 +27,13 @@
               <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" class="form-control" formControlName="email" 
-                  [ngClass]="{'is-invalid':form.get('email').touched && form.get('email').invalid}" />
+                  [ngClass]="{'is-invalid':form.get('email').touched && form.get('email').invalid}" required/>
               </div>
 
               <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" formControlName="password"
-                  [ngClass]="{'is-invalid':form.get('password').touched && form.get('password').invalid}" />
+                  [ngClass]="{'is-invalid':form.get('password').touched && form.get('password').invalid}" required/>
               </div>
               <br>
 

@@ -18,7 +18,6 @@ export class SignupComponent implements OnInit {
   form = new FormGroup({
     firstname: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
-    captcha: new FormControl('', Validators.required),
     email: new FormControl('', [
       Validators.required,
       Validators.email
@@ -26,7 +25,8 @@ export class SignupComponent implements OnInit {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6)
-    ])
+    ]),
+    captcha: new FormControl('', Validators.required),
     
    });
 
@@ -51,7 +51,7 @@ signed:Boolean;
 
  async createUser() {
    this.signed=true;
-    console.log(this.formModel.captcha , this.form.value)
+
    await this.authService.signUpUser(this.form.value ).subscribe(
      res =>{
      this.result = res;
@@ -63,7 +63,7 @@ signed:Boolean;
       window.alert(this.result.error)
       this.signed=false;
       this.form.reset();
-
+      this.form.reset();
     }
    });
  
