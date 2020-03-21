@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if(this.authService.islogin !== true) {
+    if(this.authService.islogin()) {
       window.alert("Please Login First !!")
       this.router.navigate(['login'])
     }

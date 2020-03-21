@@ -13,7 +13,8 @@ import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import {environment} from '../../environments/environment';
 import { timeout } from 'rxjs/operators';
-
+import * as jwt_decode from 'jwt-decode';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,13 +22,16 @@ const httpOptions = {
   })
 };
 
+const helper = new JwtHelperService();
+
+
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
 
-  
+
 
   userData: any; // Save logged in user data
   itemdoc: AngularFirestoreDocument; 
@@ -50,7 +54,7 @@ User;
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,  
     public ngZone: NgZone,
-    private http: HttpClient // NgZone service to remove outside scope warning
+    private http: HttpClient,
   ) {    
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -76,39 +80,25 @@ loginUser( user ){
   return this.http.post(`${this.api}/auth/login` , user , httpOptions)
 }
 
-getUser(){
-  let headers =  new Headers()
+
+authGoogle(){
+  console.log("google auth")
+  this.http.get(`${this.api}/auth/google`)
+}
+
+
+islogin(){
   this.loadToken()
-  const Token = "Bearer " + this.authToken.toString()
-  console.log(Token)
-  const httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      "Authorization" : Token
-    })
-  };
-
-  return this.http.get(`${this.api}/auth/profile`,  httpOptions )
+  return helper.isTokenExpired(this.authToken);
 }
 
 
-get  islogin() : boolean {
-
- this.http.get(`${this.api}/auth/profile`).subscribe(res=>{
-  this.result = res
-  console.log(this.result)
- })
-
-
-  return (this.result.login ) ? true : false;
-
-  
-}
 
 
 loadToken(){
   const token = localStorage.getItem('idToken')
   this.authToken = token
+  return token
 }
 
 
@@ -130,6 +120,23 @@ authlogout(){
 
 
 
+
+// getUser(){
+//   let headers =  new Headers()
+//   this.loadToken()
+//   const Token = "Bearer " + this.authToken.toString()
+//   console.log(Token)
+//   const decoded = helper.decodeToken(Token);
+//   console.log(decoded.firstname)
+//   const httpOptions = {
+//     headers: new HttpHeaders({
+//       "Content-Type": "application/json",
+//       "Authorization" : Token
+//     })
+//   };
+
+//   return this.http.get(`${this.api}/auth/profile`,  httpOptions )
+// }
 
 
 

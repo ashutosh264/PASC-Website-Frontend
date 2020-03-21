@@ -43,7 +43,7 @@ const routes: Routes = [
   {path : 'blogdetail/:id', component : BlogDetailComponent},
   {path : 'new', component : NewBlogComponent, canActivate : [AuthGuard] },
   {path : 'reviewblogs', component : AdminComponent, canActivate : [AuthGuard]},
-  {path : 'profile', component : ProfileComponent}, 
+  {path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]}, 
   {path : 'uploadGallery', component : UploaderComponent, canActivate : [AuthGuard]},
   {path : 'gallery', component : ViewGalleryComponent },
   {path : 'login', component : LoginComponent, canActivate : [SecureInnerPagesGuard]},
