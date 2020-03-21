@@ -7,6 +7,10 @@ import { Router } from "@angular/router";
 import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { AuthService } from "../../services/auth.service";
 import { Title } from "@angular/platform-browser";
+import { JwtHelperService } from "@auth0/angular-jwt";
+
+
+const helper = new JwtHelperService();
 
 @Component({
   selector: "app-new-blog",
@@ -34,8 +38,12 @@ export class NewBlogComponent implements OnInit {
     public router: Router,
     private titleService: Title
   ) {}
-
+currentUser;
+  token;
   ngOnInit() {
+  
+    this.token = this.authService.loadToken()
+    this.currentUser = helper.decodeToken(this.token);
     this.titleService.setTitle(this.title);
   }
   async createPost() {
@@ -50,7 +58,7 @@ export class NewBlogComponent implements OnInit {
         date: new Date().toISOString(),
         category: this.category,
         author: {
-          author_name : this.authService.authState.displayName,
+          author_name : this.currentUser.firstname + " " + this.currentUser.lastname ,
         },
         approve: false
       };
