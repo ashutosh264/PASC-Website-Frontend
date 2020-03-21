@@ -12,6 +12,7 @@ import {authUser} from '../shared/authUser';
 import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import {environment} from '../../environments/environment';
+import { timeout } from 'rxjs/operators';
 
 
 const httpOptions = {
@@ -41,7 +42,8 @@ User;
   api = environment.port;
   result;
   ans;
-
+  authToken;
+  authUser;
 
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
@@ -66,34 +68,65 @@ User;
 
 
 signUpUser( user ){
-
   return this.http.post(`${this.api}/auth/signup` , user , httpOptions)
 }
 
 
 loginUser( user ){
-
   return this.http.post(`${this.api}/auth/login` , user , httpOptions)
-  
+}
+
+getUser(){
+  let headers =  new Headers()
+  this.loadToken()
+  const Token = "Bearer " + this.authToken.toString()
+  console.log(Token)
+  const httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization" : Token
+    })
+  };
+
+  return this.http.get(`${this.api}/auth/profile`,  httpOptions )
 }
 
 
 get  islogin() : boolean {
 
- this.http.get(`${this.api}/auth/protected`).subscribe(res=>{
+ this.http.get(`${this.api}/auth/profile`).subscribe(res=>{
   this.result = res
   console.log(this.result)
  })
 
 
   return (this.result.login ) ? true : false;
-;
+
   
 }
 
 
+loadToken(){
+  const token = localStorage.getItem('idToken')
+  this.authToken = token
+}
 
 
+storeToken(token ){
+  console.log(token)
+  localStorage.setItem( 'idToken' , token );
+  this.authToken = token
+
+}
+
+
+authlogout(){
+  this.authToken=null;
+  this.authUser=null;
+  localStorage.clear();
+  window.alert(" Logout Successfull !!" )
+  this.router.navigate(['login']);
+}
 
 
 

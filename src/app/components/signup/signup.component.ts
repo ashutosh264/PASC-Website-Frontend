@@ -4,7 +4,6 @@ import { Title } from '@angular/platform-browser';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 
-
 export interface FormModel {
   captcha?: string;
 }
@@ -17,8 +16,8 @@ export interface FormModel {
 export class SignupComponent implements OnInit {
 
   form = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required),
     captcha: new FormControl('', Validators.required),
     email: new FormControl('', [
       Validators.required,
@@ -37,7 +36,8 @@ signed:Boolean;
   public formModel: FormModel = {};
   
   constructor(public authService : AuthService,
-    private titleService: Title , public router: Router,  
+    private titleService: Title , public router: Router,
+
     ) { }
   authError: any;
 

@@ -34,7 +34,7 @@
     </div>
 
     <div class="justify-content-center">
-      <div class="row" *ngIf="authService.userData as user">
+      <div class="row" *ngIf="this.User as user">
 
         <div class="col-md-12">
 
@@ -45,7 +45,7 @@
               style="width:100%">
             <br>
             <h1>
-              <strong>{{ user.displayName }}</strong>
+              <strong>{{ user.firstname }} {{user.lastname}}</strong>
             </h1>
             <br>
             <p>

@@ -79,8 +79,14 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="/signup" routerLinkActive="active"  ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">SignUp</span></a>
             </li>
+            <li class="nav-item">
 
-
+              <a class="nav-link" (click)="authService.authlogout()" routerLinkActive="active" data-toggle="tooltip"
+                data-placement="bottom" title="Logout"><i class="fa fa-sign-out" data-toggle="collapse" data-target="#navbarSupportedContent" ></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/profile" routerLinkActive="active"><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Profile</span></a>
+            </li>
 
           </ul>
         </div>

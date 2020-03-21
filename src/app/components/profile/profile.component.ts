@@ -9,17 +9,23 @@ import { Title } from '@angular/platform-browser';
 })
 export class ProfileComponent implements OnInit {
 
-
-
+  result;
+  User;
 
   constructor(public authService : AuthService,
     private titleService: Title) { }
 
     title= 'Profile';
   ngOnInit() {
-    setTimeout(() => {
-      this.titleService.setTitle(this.authService.userData.displayName);
-    }, 2000);
+
+    this.authService.getUser().subscribe( res=>{
+      this.result=res
+      this.User = this.result.user;
+      this.titleService.setTitle(this.User.firstname + " " + this.User.lastname);
+
+    } )
+
+  
    
     console.log(this.title);
   }

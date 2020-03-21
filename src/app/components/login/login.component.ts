@@ -6,6 +6,7 @@ import {ElementRef} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { Local } from 'protractor/built/driverProviders';
 
 
 @Component({
@@ -58,9 +59,13 @@ export class LoginComponent implements OnInit {
      res =>{
      this.result = res;
      if(!this.result.error){
-       console.log(this.result.user)
-       window.alert("Login Succesfull !!")
-      this.router.navigate(['blogs']);
+       console.log(this.result.token.toString())
+
+       this.authService.storeToken( this.result.token )
+
+      setTimeout(() => {
+        this.router.navigate(['blogs']);
+      }, 1000);
      }
     else{
       window.alert(this.result.error)
@@ -70,4 +75,9 @@ export class LoginComponent implements OnInit {
    });
  
   }
+
+
+ 
+
+
 }
