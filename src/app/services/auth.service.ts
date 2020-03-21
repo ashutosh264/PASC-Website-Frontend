@@ -39,6 +39,8 @@ User;
 
   //----------nodejs-------------
   api = environment.port;
+  result;
+  ans;
 
 
   constructor(
@@ -76,9 +78,16 @@ loginUser( user ){
 }
 
 
-islogin( ){
+get  islogin() : boolean {
 
-  return this.http.get(`${this.api}/auth/protected` )
+ this.http.get(`${this.api}/auth/protected`).subscribe(res=>{
+  this.result = res
+  console.log(this.result)
+ })
+
+
+  return (this.result.login ) ? true : false;
+;
   
 }
 

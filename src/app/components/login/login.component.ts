@@ -43,6 +43,8 @@ export class LoginComponent implements OnInit {
       this.titleService.setTitle("Login");
     })
     this.signed=false
+   
+
     // this.clicked=false;
     // var s = document.createElement("script");
     // s.type = "text/javascript";
@@ -56,6 +58,7 @@ export class LoginComponent implements OnInit {
      res =>{
      this.result = res;
      if(!this.result.error){
+       console.log(this.result.user)
        window.alert("Login Succesfull !!")
       this.router.navigate(['blogs']);
      }
