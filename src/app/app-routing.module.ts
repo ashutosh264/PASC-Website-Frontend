@@ -28,6 +28,7 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import {TableComponent} from './components/table/table.component';
 import { AdminFeedbackComponent } from './components/admin-feedback/admin-feedback.component';
 import { AchieveComponent } from './components/achieve/achieve.component';
+import { AdminProjectsComponent } from './components/admin-projects/admin-projects.component';
 
 
 
@@ -57,6 +58,8 @@ const routes: Routes = [
   {path: 'table', component: TableComponent, canActivate: [AuthGuard]},
   {path: 'feedback', component: AdminFeedbackComponent, canActivate: [AuthGuard]},
   {path : 'adminDetails/:id' , component : AdminVdetailsComponent, canActivate : [ AuthGuard ]},
+
+  {path:'projects', component: AdminProjectsComponent, canActivate: [AuthGuard]},
 
 
   {path : '', redirectTo: '/home', pathMatch: 'full' }
