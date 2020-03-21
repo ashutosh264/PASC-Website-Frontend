@@ -15,6 +15,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { BlogService } from './services/blog.service';
 import { NewBlogComponent } from './components/new-blog/new-blog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
@@ -125,7 +126,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatDatepickerModule,
     MatNativeDateModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    FlashMessagesModule
   ],
   providers: [
 

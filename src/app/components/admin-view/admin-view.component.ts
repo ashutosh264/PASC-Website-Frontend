@@ -7,6 +7,10 @@ import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs'
 import { UpcomingService } from 'src/app/services/upcoming.service';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
+
+const helper = new JwtHelperService();
 
 @Component({
   selector: 'app-admin-view',
@@ -29,11 +33,15 @@ export class AdminViewComponent implements OnInit {
   ) { }
 currentUser:any;
 
+token;
   ngOnInit() {
-    setTimeout(() => {
-      this.getAdmin()
+  
+    this.token = this.authService.loadToken()
+    this.currentUser = helper.decodeToken(this.token);
+    // setTimeout(() => {
+    //   this.getAdmin()
      
-    }, 1000);
+    // }, 1000);
    
   }
 
