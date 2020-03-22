@@ -1,0 +1,76 @@
+<br>
+<br><br><br><br><br>
+<div class="container">
+    <div class="row" *ngIf="projects.length != 0">
+        <!-- <div class="col-md-4 col-sm-6">
+        <div class="card" type="button" data-toggle="modal" data-target="#projectModal">
+            <img class="card-img-top" src="../../../assets/undraw_camera_mg5h.png">
+            <div class="card-body">
+                <h4 class="card-title">Heading from Node</h4>
+                <div class="card-text pull-right"><em>-Author from node</em></div>
+                <br>
+                <div class="card-text">Content goes here</div>
+                <p><a href="link goes her">Link goes here and the href attribute</a></p>
+                <div class="text-center">Click On the card to open the modal</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="card" type="button" data-toggle="modal" data-target="#projectModal">
+            <img class="card-img-top" src="../../../assets/undraw_camera_mg5h.png">
+            <div class="card-body">
+                <h4 class="card-title">Heading from Node</h4>
+                <div class="card-text pull-right"><em>-Author from node</em></div>
+                <br>
+                <div class="card-text">Content goes here</div>
+                <p><a href="link goes her">Link goes here and the href attribute</a></p>
+                <div class="text-center">Click On the card to open the modal</div>
+            </div>
+        </div>
+    </div> -->
+        <div class="col-md-4 col-sm-6 pt-4 " *ngFor="let project of projects" (click)="openInModal(project)">
+            <div class="card" type="button" data-toggle="modal" data-target="#projectModal">
+                <!-- <img class="card-img-top" src="../../../assets/undraw_camera_mg5h.png"> -->
+                <div class="card-body">
+                    <h4 class="card-title">{{project.heading}}</h4>
+                    <div class="card-text pull-right"><em>-{{project.author?.author_name}}</em></div>
+                    <br>
+                    <div class="card-text">
+                        <p><a href="link goes her">{{project.link}}</a></p>
+                    </div>
+                    <div class="text-center">Click On the card to open the modal</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- This is a modal for showing the details of the project -->
+<div *ngIf="modalProject">
+    <div id="projectModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{modalProject.heading}}</h4>
+                    <button class="close" type="button" data-dismiss="modal" (click)="onModalClose()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div style="word-break: break-all;">{{modalProject.content}}</div>
+                    <div>
+                        <p><a href="link goes her">{{modalProject.link}}</a></p>
+                    </div>
+                    <div>
+                        <p>Creation date {{modalProject.date | date:'mediumDate' }}</p>
+                    </div>
+                    <div class="pull-right">
+                        <em>-{{modalProject.author?.author_name}}</em>
+                    </div>
+                </div>
+                <div class="modal-footer align-items-center">
+                    <button class="btn btn-primary" data-dismiss="modal" type="button" (click)="onAccept()">Accept</button>
+                    <button class="btn btn-danger " data-dismiss="modal" type="button" (click)="onDelete()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
