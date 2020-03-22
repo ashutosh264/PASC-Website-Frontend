@@ -61,10 +61,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AchieveComponent } from './components/achieve/achieve.component';
 
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { NewprojectComponent } from './components/newproject/newproject.component';
 import { AdminProjectsComponent } from './components/admin-projects/admin-projects.component';
+
+import { BasicAuthInterceptor} from './shared/interceptor';
 
 
 
@@ -135,7 +137,7 @@ import { AdminProjectsComponent } from './components/admin-projects/admin-projec
     FlashMessagesModule
   ],
   providers: [
-
+    // { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

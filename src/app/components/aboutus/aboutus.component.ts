@@ -26,6 +26,7 @@ export class AboutusComponent implements OnInit {
   email : string;
   subject: string;
   text : string;
+  captcha;
 
   public formModel: FormModel = {};
 
@@ -52,14 +53,14 @@ export class AboutusComponent implements OnInit {
       name : this.name,
       email : this.email,
       subject : this.subject,
-      text : this.text
+      text : this.text,
+      captcha : this.captcha
     };
     console.log(data);
     let a = this.blogService.createFeed(data).subscribe();
     console.log(a);
     setTimeout(() => {
       window.alert("Feedback Received")
-
     }, 1000);
   }
 
