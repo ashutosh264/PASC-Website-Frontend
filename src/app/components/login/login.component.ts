@@ -1,50 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { Renderer2, Inject } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { DOCUMENT } from '@angular/common';
-import {ElementRef} from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { Renderer2, Inject } from "@angular/core";
+import { AuthService } from "../../services/auth.service";
+import { DOCUMENT } from "@angular/common";
+import { ElementRef } from "@angular/core";
+import { Title } from "@angular/platform-browser";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Local } from 'protractor/built/driverProviders';
-
+import { Local } from "protractor/built/driverProviders";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"]
 })
-
-
 export class LoginComponent implements OnInit {
-
   form = new FormGroup({
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email
-    ]),
-    password: new FormControl('', [
+    email: new FormControl("", [Validators.required, Validators.email]),
+    password: new FormControl("", [
       Validators.required,
       Validators.minLength(6)
     ])
-    
-   });
+  });
 
-  authError : any;
+  authError: any;
   clicked = false;
   result;
-  signed:Boolean;
-  constructor(public authService : AuthService,public router: Router, private elementRef:ElementRef ,  private titleService: Title)  { }
+  signed: Boolean;
+  constructor(
+    public authService: AuthService,
+    public router: Router,
+    private elementRef: ElementRef,
+    private titleService: Title
+  ) {}
 
   ngOnInit() {
-    
-    this.authService.eventAuthError$.subscribe( data => {
+    this.authService.eventAuthError$.subscribe(data => {
       this.authError = data;
 
       this.titleService.setTitle("Login");
-    })
-    this.signed=false
-   
+    });
+    this.signed = false;
 
     // this.clicked=false;
     // var s = document.createElement("script");
@@ -52,32 +47,28 @@ export class LoginComponent implements OnInit {
     // s.src = "../../../assets/scripts/login.js";
     // this.elementRef.nativeElement.appendChild(s);
   }
-  
+
   async login() {
-    this.signed=true
-   await this.authService.loginUser(this.form.value ).subscribe(
-     res =>{
-     this.result = res;
-     if(!this.result.error){
-       console.log(this.result.token.toString())
+    this.signed = true;
+    await this.authService.loginUser(this.form.value).subscribe(res => {
+      this.result = res;
+      if (!this.result.error) {
+        console.log(this.result.token.toString());
 
-       this.authService.storeToken( this.result.token )
+        this.authService.storeToken(this.result.token);
 
-      setTimeout(() => {
-        this.router.navigate(['blogs']);
-      }, 1000);
-     }
-    else{
-      window.alert(this.result.error)
-      this.signed=false
-      this.form.reset();
-    }
-   });
- 
+        setTimeout(() => {
+          this.router.navigate(["blogs"]);
+        }, 1000);
+      } else {
+        window.alert(this.result.error);
+        this.signed = false;
+        this.form.reset();
+      }
+    });
   }
-
-
- 
-
-
+  async loginGoogle() {
+    const a = await (await this.authService.authGoogle()).subscribe();
+    console.log(a);
+  }
 }

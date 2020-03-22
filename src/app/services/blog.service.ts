@@ -126,7 +126,7 @@ export class BlogService {
     return this.http.get(`${this.api}/api/projects`);
   }
   addProject(data) {
-    return this.http.post(`${this.api}/projects/new`, data)
+    return this.http.post(`${this.api}/api/projects/new`, data)
   }
   uploadImage(file) {
     const formData = new FormData();

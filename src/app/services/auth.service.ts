@@ -74,9 +74,14 @@ export class AuthService {
     return this.http.post(`${this.api}/auth/login`, user, httpOptions);
   }
 
-  authGoogle() {
+  async authGoogle() {
     console.log("google auth");
-    this.http.get(`${this.api}/auth/google`);
+    const url = `${this.api}/auth/google`;
+    const options = `width=${500},height=${600},left=${0},top=${0}`;
+    window.open(url, name, options);
+    // return this.http.get(`${this.api}/auth/google`);
+    // window.location.href = `${this.api}/auth/google`;
+    return this.http.get(`${this.api}/auth/google/callback`);
   }
 
   islogin() {
@@ -104,22 +109,22 @@ export class AuthService {
     this.router.navigate(["login"]);
   }
 
-  // getUser(){
-  //   let headers =  new Headers()
-  //   this.loadToken()
-  //   const Token = "Bearer " + this.authToken.toString()
-  //   console.log(Token)
-  //   const decoded = helper.decodeToken(Token);
-  //   console.log(decoded.firstname)
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       "Content-Type": "application/json",
-  //       "Authorization" : Token
-  //     })
-  //   };
+  getUser(){
+    let headers =  new Headers()
+    this.loadToken()
+    const Token = "Bearer " + this.authToken.toString()
+    console.log(Token)
+    const decoded = helper.decodeToken(Token);
+    console.log(decoded.firstname)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization" : Token
+      })
+    };
 
-  //   return this.http.get(`${this.api}/auth/profile`,  httpOptions )
-  // }
+    return this.http.get(`${this.api}/auth/profile`,  httpOptions )
+  }
 
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());

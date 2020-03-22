@@ -29,9 +29,9 @@ export class BlogDetailComponent implements OnInit {
   token;
 
   ngOnInit() {
-    // this.token = this.authService.loadToken();
-    // this.currentUser = helper.decodeToken(this.token);
-    // this.admin = this.currentUser.admin;
+    this.token = this.authService.loadToken();
+    this.currentUser = helper.decodeToken(this.token);
+    this.admin = this.currentUser.admin;
 
     const id = this.route.snapshot.params["id"];
     this.blog = this.blogService.getSelectedBlog(id).subscribe(data => {
