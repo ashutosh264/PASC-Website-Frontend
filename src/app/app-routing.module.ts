@@ -28,6 +28,8 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import {TableComponent} from './components/table/table.component';
 import { AdminFeedbackComponent } from './components/admin-feedback/admin-feedback.component';
 import { AchieveComponent } from './components/achieve/achieve.component';
+
+import { NewprojectComponent } from './components/newproject/newproject.component';
 import { AdminProjectsComponent } from './components/admin-projects/admin-projects.component';
 
 
@@ -42,6 +44,7 @@ const routes: Routes = [
   {path : 'achieve', component : AchieveComponent },
   {path : 'blogs', component : BlogListComponent },
   {path : 'blogdetail/:id', component : BlogDetailComponent},
+  {path : 'project/new', component : NewprojectComponent},
   {path : 'new', component : NewBlogComponent, canActivate : [AuthGuard] },
   {path : 'reviewblogs', component : AdminComponent, canActivate : [AuthGuard]},
   {path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]}, 

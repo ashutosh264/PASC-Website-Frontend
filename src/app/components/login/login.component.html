@@ -44,6 +44,7 @@
     </div>
   </div>  -->
 
+  <div *ngIf="!signed">
 <div class="m-5"></div>
 <div>
   <div class="justify-content-center">
@@ -55,30 +56,34 @@
           <div class="card login-box">
             <img src="../../../assets/images/avc/avatar.png" class="avatar">
             <h1>Login Here</h1>
-            <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+            <form name="form" [formGroup]="form" (ngSubmit)="form.valid && login()">
 
-              <div>
-                <label for="email">Email</label>
-                <input ngModel #email="ngModel" name="email" type="email" class="form-control">
-              </div>
+              
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control" formControlName="email" 
+                    [ngClass]="{'is-invalid':form.get('email').touched && form.get('email').invalid}" />
+                </div>
 
-              <div>
-                <label for="password">Password</label>
-                <input ngModel #password="ngModel" name="password" type="password" class="form-control">
-              </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" formControlName="password"
+                    [ngClass]="{'is-invalid':form.get('password').touched && form.get('password').invalid}" />
+                </div>
+                
 
-              <input type="submit" name="submit" value="Login">
-              <br>
-              <div #recaptcha></div>
+                <div class="form-group">
+                  <button class="btn btn-primary" [disabled]="!form.valid">Login</button>
+                </div>
 
               <div class="forgot">
                 <a><span class="redirect" routerLink="/forgot">Forgot Password ?</span></a>
                 <br><br>
                 <p class="para"> Or</p> <br>
-                <button type="button" class="btn " (click)="authService.GoogleAuth()">
+               <a href="https://pasc-node-app.herokuapp.com/auth/google" > <button type="button" class="btn " (click)="this.authService.authGoogle()">
                   Log in with Google
                   <i class="fa fa-google"></i>
-                </button>
+                </button></a>
                 <br><br>
                 <a><span class="redirect" routerLink="/signup">New User ? SignUp Here</span></a>
 
@@ -97,6 +102,17 @@
   </div>
 </div>
 
-
-
 <br><br><br><br>
+
+</div>
+
+<div *ngIf="signed">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+  <br>
+  <br>
+</div>

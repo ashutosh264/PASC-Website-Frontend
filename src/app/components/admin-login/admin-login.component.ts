@@ -4,6 +4,11 @@ import { AuthService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/common';
 import {ElementRef} from '@angular/core';
 
+import { Title } from '@angular/platform-browser';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
+import { Local } from 'protractor/built/driverProviders';
+
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
@@ -11,18 +16,58 @@ import {ElementRef} from '@angular/core';
 })
 export class AdminLoginComponent implements OnInit {
 
-  authError : any;
- 
+  form = new FormGroup({
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6)
+    ])
+    
+   });
 
-  constructor(public authService : AuthService, private elementRef:ElementRef)  { }
+  authError : any;
+  clicked = false;
+  result;
+  signed:Boolean;
+  constructor(public authService : AuthService,public router: Router, private elementRef:ElementRef ,  private titleService: Title)  { }
 
   ngOnInit() {
-    this.authService.eventAuthError$.subscribe( data => {
-      this.authError = data;
-    });
+    
+
+    this.signed=false
+    this.titleService.setTitle("Login");
+   
   }
-  login(frm) {
-    this.authService.adminlogin(frm.value.email, frm.value.password);
+  
+  async login() {
+    this.signed=true
+   await this.authService.loginUser(this.form.value ).subscribe(
+     res =>{
+     this.result = res;
+     if(!this.result.error && this.result.user.admin){
+       console.log(this.result.token.toString())
+
+       this.authService.storeToken( this.result.token )
+
+      setTimeout(() => {
+        this.router.navigate(['adminPanel']);
+      }, 1000);
+     }
+    else{
+      window.alert(this.result.error)
+      this.signed=false
+      this.form.reset();
+    }
+   });
+ 
   }
 
+
+ 
+
+
 }
+

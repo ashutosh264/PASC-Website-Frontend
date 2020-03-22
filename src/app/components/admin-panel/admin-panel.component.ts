@@ -4,6 +4,12 @@ import { AngularFirestore, AngularFirestoreDocument} from 'angularfire2/firestor
 import { AuthService } from '../../services/auth.service';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs'
+import { JwtHelperService } from "@auth0/angular-jwt";
+
+
+const helper = new JwtHelperService();
+
+
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
@@ -16,23 +22,16 @@ export class AdminPanelComponent implements OnInit {
   User;
   currentUser : any
   item: any;
-
+  token;
   ngOnInit() {
   
-    setTimeout(() => {
-      this.getAdmin()
-     
-    }, 2000);
+    this.token = this.authService.loadToken()
+    this.currentUser = helper.decodeToken(this.token);
   
     
   }
   
 
-  getAdmin()
-  {
-    this.afs.doc(`users/${this.angularFireAuth.auth.currentUser.uid}`).valueChanges().subscribe(item => {this.currentUser = item})
-
-  }
 
 
 }

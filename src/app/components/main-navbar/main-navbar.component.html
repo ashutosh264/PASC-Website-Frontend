@@ -33,65 +33,165 @@
   </div>
 </nav> -->
 
-<div *ngIf="authService.afAuth.authState | async; then authenticatd else guet"></div>
+<section>
+  <nav
+    class="navbar navbar-expand-lg navbar-light  fixed-top top-nav-collapse fill"
+    style="z-index: 1000;"
+  >
+    <div class="container">
+      <a class="navbar-brand" href="#"
+        ><i class="fas fa-chess-king"></i>
+        <img class="navlogo" src="../../../assets/images/navbar/Logo-name.png"
+      /></a>
 
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >Home</span
+              ></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/events" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >Events</span
+              ></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/domains" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >Domains</span
+              ></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/team" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >Our Team</span
+              ></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/gallery" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >Gallery</span
+              ></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/blogs" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >Blog</span
+              ></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/aboutus" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >About Us</span
+              ></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/achieve" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >Achievements</span
+              ></a
+            >
+          </li>
 
-<ng-template #guet>
-  <section>
-    <nav class="navbar navbar-expand-lg navbar-light  fixed-top top-nav-collapse fill" style="z-index: 1000;">
-      <div class="container">
-        <a class="navbar-brand" href="#"><i class="fas fa-chess-king"></i> <img class="navlogo"
-            src="../../../assets/images/navbar/Logo-name.png"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item " >
-              <a   class="nav-link" routerLink="/home" routerLinkActive="active" ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Home</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/events" routerLinkActive="active"  ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Events</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/domains" routerLinkActive="active" ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Domains</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/team" routerLinkActive="active"  ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Our Team</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/gallery" routerLinkActive="active" ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Gallery</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/blogs" routerLinkActive="active" ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Blog</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/aboutus" routerLinkActive="active" ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">About Us</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/achieve" routerLinkActive="active"  ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Achievements</span></a>
-            </li>
+          <li class="nav-item" *ngIf="authService.islogin()">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >Login</span
+              ></a
+            >
+          </li>
+          <li class="nav-item" *ngIf="authService.islogin()">
+            <a class="nav-link" routerLink="/signup" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >SignUp</span
+              ></a
+            >
+          </li>
+          <li class="nav-item"></li>
 
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/login" routerLinkActive="active"  ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Login</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/signup" routerLinkActive="active"  ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">SignUp</span></a>
-            </li>
-
-
-
-          </ul>
-        </div>
+          <li class="nav-item" *ngIf="!authService.islogin()">
+            <a class="nav-link" routerLink="/profile" routerLinkActive="active"
+              ><span
+                id="text"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                >Profile</span
+              ></a
+            >
+          </li>
+          <li class="nav-item" *ngIf="!authService.islogin()">
+            <a
+              class="nav-link"
+              (click)="authService.authlogout()"
+              routerLinkActive="active"
+              data-toggle="tooltip"
+              data-placement="bottom"
+              title="Logout"
+              ><i
+                class="fa fa-sign-out"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+              ></i
+            ></a>
+          </li>
+        </ul>
       </div>
-    </nav>
-  </section>
-</ng-template>
+    </div>
+  </nav>
+</section>
 
-
-
-<ng-template #authenticatd>
+<!-- <ng-template #authenticatd>
   <section>
     <nav class="navbar navbar-expand-lg navbar-light  fixed-top top-nav-collapse fill" style="z-index: 1000;">
       <div class="container">
@@ -128,7 +228,6 @@
               <a class="nav-link" routerLink="/achieve" routerLinkActive="active"><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Achievements</span></a>
             </li>
 
-            <!-- add profile avatar with logout and profile dropdown -->
             <ng-container *ngIf="currentUser">
               <li class="nav-item">
                 <a class="nav-link" routerLink="/profile" routerLinkActive="active"><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Profile</span></a>
@@ -145,21 +244,41 @@
       </div>
     </nav>
   </section>
-</ng-template>
+</ng-template> -->
 
 <div class="button desktop-only">
   <div class="links">
-    <a class="fa fa-twitter" target="_blank" href="https://twitter.com/_pict_acm_"></a>
-    <a class="fa fa-instagram" target="_blank" href="https://www.instagram.com/acm.pict/"></a>
-    <a class="fa fa-facebook" target="_blank" href="https://www.facebook.com/acmpict/"></a>
-    <a class="fa fa-linkedin" target="_blank" href="https://www.linkedin.com/company/pict-acm-student-chapter/"></a>
+    <a
+      class="fa fa-twitter"
+      target="_blank"
+      href="https://twitter.com/_pict_acm_"
+    ></a>
+    <a
+      class="fa fa-instagram"
+      target="_blank"
+      href="https://www.instagram.com/acm.pict/"
+    ></a>
+    <a
+      class="fa fa-facebook"
+      target="_blank"
+      href="https://www.facebook.com/acmpict/"
+    ></a>
+    <a
+      class="fa fa-linkedin"
+      target="_blank"
+      href="https://www.linkedin.com/company/pict-acm-student-chapter/"
+    ></a>
   </div>
   <div class="overlay">
     <a><br />F<br />O<br />L<br />L<br />O<br />W<br /><br /></a>
   </div>
 </div>
 
-<a class="button1 desktop-only" routerLink="/events" style="text-decoration: none;">
+<a
+  class="button1 desktop-only"
+  routerLink="/events"
+  style="text-decoration: none;"
+>
   <!-- <div class="links">
     <a class="fa fa-twitter" target="_blank" href="https://twitter.com/"></a>
     <a class="fa fa-instagram" target="_blank" href="https://www.instagram.com//"></a>

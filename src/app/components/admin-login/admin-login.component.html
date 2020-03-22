@@ -1,38 +1,59 @@
-
-  <div class=" back ">  
+<div *ngIf="!signed">
+  <div class="m-5"></div>
+  <div>
     <div class="justify-content-center">
-    <div class="container">
-     
-    <div class=" row ">
-      <div class="col-lg-4 " ></div>
-      <div class="col-12 col-lg-4 ">
-  <div class="card login-box">
-    <img src="../../../assets/images/avc/avatar.png" class="avatar">
-        <h1>Login Here</h1>
-            <form  #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-              
-              <div >
-                <label for="email">Email</label>
-                <input ngModel #email="ngModel" name="email" type="email" class="form-control">
+      <div class="container">
+  
+        <div class=" row ">
+          <div class="col-lg-4 "></div>
+          <div class="col-12 col-lg-4 ">
+            <div class="card login-box">
+              <img src="../../../assets/images/avc/avatar.png" class="avatar">
+              <h1>Login Here</h1>
+              <form name="form" [formGroup]="form" (ngSubmit)="form.valid && login()">
+  
+                
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" formControlName="email" 
+                      [ngClass]="{'is-invalid':form.get('email').touched && form.get('email').invalid}" />
+                  </div>
+  
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" formControlName="password"
+                      [ngClass]="{'is-invalid':form.get('password').touched && form.get('password').invalid}" />
+                  </div>
+                  
+  
+                  <div class="form-group">
+                    <button class="btn btn-primary" [disabled]="!form.valid">Login</button>
+                  </div>
+
+  
+              </form>
+  
+  
+            </div>
           </div>
-
-          <div>
-            <label for="password">Password</label>
-            <input ngModel #password="ngModel" name="password" type="password" class="form-control">
-          </div>
-
-            <input type="submit" name="submit" value="Login" >
-
-          
-
-            </form>
-        
-        
+  
         </div>
-        </div>
-
       </div>
+  
     </div>
-
-</div>
-</div> 
+  </div>
+  
+  <br><br><br><br>
+  
+  </div>
+  
+  <div *ngIf="signed">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+    <br>
+    <br>
+  </div>

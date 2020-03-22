@@ -15,6 +15,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { BlogService } from './services/blog.service';
 import { NewBlogComponent } from './components/new-blog/new-blog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
@@ -61,6 +62,8 @@ import { AchieveComponent } from './components/achieve/achieve.component';
 
 
 import { HttpClientModule } from '@angular/common/http';
+
+import { NewprojectComponent } from './components/newproject/newproject.component';
 import { AdminProjectsComponent } from './components/admin-projects/admin-projects.component';
 
 
@@ -100,6 +103,7 @@ import { AdminProjectsComponent } from './components/admin-projects/admin-projec
     AdminFeedbackComponent,
     FooterComponent,
     AchieveComponent,
+    NewprojectComponent
     AdminProjectsComponent,
   ],
   imports: [
@@ -127,7 +131,8 @@ import { AdminProjectsComponent } from './components/admin-projects/admin-projec
     MatDatepickerModule,
     MatNativeDateModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    FlashMessagesModule
   ],
   providers: [
 
