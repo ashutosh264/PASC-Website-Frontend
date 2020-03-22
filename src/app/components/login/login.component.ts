@@ -4,7 +4,9 @@ import { AuthService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/common';
 import {ElementRef} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from "@angular/router";
+import { Local } from 'protractor/built/driverProviders';
 
 
 @Component({
@@ -15,10 +17,24 @@ import { Title } from '@angular/platform-browser';
 
 
 export class LoginComponent implements OnInit {
+
+  form = new FormGroup({
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6)
+    ])
+    
+   });
+
   authError : any;
   clicked = false;
- 
-  constructor(public authService : AuthService, private elementRef:ElementRef ,  private titleService: Title)  { }
+  result;
+  signed:Boolean;
+  constructor(public authService : AuthService,public router: Router, private elementRef:ElementRef ,  private titleService: Title)  { }
 
   ngOnInit() {
     
@@ -27,6 +43,9 @@ export class LoginComponent implements OnInit {
 
       this.titleService.setTitle("Login");
     })
+    this.signed=false
+   
+
     // this.clicked=false;
     // var s = document.createElement("script");
     // s.type = "text/javascript";
@@ -34,7 +53,31 @@ export class LoginComponent implements OnInit {
     // this.elementRef.nativeElement.appendChild(s);
   }
   
-  login(frm) {
-    this.authService.login(frm.value.email, frm.value.password);
+  async login() {
+    this.signed=true
+   await this.authService.loginUser(this.form.value ).subscribe(
+     res =>{
+     this.result = res;
+     if(!this.result.error){
+       console.log(this.result.token.toString())
+
+       this.authService.storeToken( this.result.token )
+
+      setTimeout(() => {
+        this.router.navigate(['blogs']);
+      }, 1000);
+     }
+    else{
+      window.alert(this.result.error)
+      this.signed=false
+      this.form.reset();
+    }
+   });
+ 
   }
+
+
+ 
+
+
 }

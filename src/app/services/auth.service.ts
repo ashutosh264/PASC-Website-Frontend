@@ -8,12 +8,30 @@ import { Router } from "@angular/router";
 import { BehaviorSubject } from 'rxjs'
 import * as firebase from 'firebase/app';
 import { async } from '@angular/core/testing';
+import {authUser} from '../shared/authUser'; 
+import { HttpClient } from "@angular/common/http";
+import { HttpHeaders } from "@angular/common/http";
+import {environment} from '../../environments/environment';
+import { timeout } from 'rxjs/operators';
+import * as jwt_decode from 'jwt-decode';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json"
+  })
+};
+
+const helper = new JwtHelperService();
+
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
+
+
 
   userData: any; // Save logged in user data
   itemdoc: AngularFirestoreDocument; 
@@ -23,14 +41,21 @@ export class AuthService {
   newUser: any;
 log:any;
 User;
+
+  //----------nodejs-------------
+  api = environment.port;
+  result;
+  ans;
+  authToken;
+  authUser;
+
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,  
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone,
+    private http: HttpClient,
   ) {    
-    /* Saving user data in localstorage when 
-    logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
@@ -43,6 +68,76 @@ User;
     })
     this.afAuth.authState.subscribe(data => this.authState = data)
   }
+
+
+
+signUpUser( user ){
+  return this.http.post(`${this.api}/auth/signup` , user , httpOptions)
+}
+
+
+loginUser( user ){
+  return this.http.post(`${this.api}/auth/login` , user , httpOptions)
+}
+
+
+authGoogle(){
+  console.log("google auth")
+  this.http.get(`${this.api}/auth/google`)
+}
+
+
+islogin(){
+  this.loadToken()
+  return helper.isTokenExpired(this.authToken);
+}
+
+
+loadToken(){
+  const token = localStorage.getItem('idToken')
+  this.authToken = token
+  return token
+}
+
+
+storeToken(token ){
+  console.log(token)
+  localStorage.setItem( 'idToken' , token );
+  this.authToken = token
+
+}
+
+
+authlogout(){
+  this.authToken=null;
+  this.authUser=null;
+  localStorage.clear();
+  window.alert(" Logout Successfull !!" )
+  this.router.navigate(['login']);
+}
+
+
+
+
+// getUser(){
+//   let headers =  new Headers()
+//   this.loadToken()
+//   const Token = "Bearer " + this.authToken.toString()
+//   console.log(Token)
+//   const decoded = helper.decodeToken(Token);
+//   console.log(decoded.firstname)
+//   const httpOptions = {
+//     headers: new HttpHeaders({
+//       "Content-Type": "application/json",
+//       "Authorization" : Token
+//     })
+//   };
+
+//   return this.http.get(`${this.api}/auth/profile`,  httpOptions )
+// }
+
+
+
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());
   }

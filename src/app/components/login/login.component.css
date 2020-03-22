@@ -42,24 +42,7 @@ h1{
     width: 100%;
     margin-bottom: 20px;
 }
-/* .login-box input[type="email"], input[type="password"]
-{
-    border: none;
-    border: 1px solid #000; 
-    background: transparent;
-    outline: none;
-    height: 40px;
-    color: #fff;
-    font-size: 16px;
-    transition: all ease-in 0.2s;
-} */
 
-/* .login-box input[type="email"]:hover{
-    border: 1px solid #111111;
-} */
-/* .login-box input[type="password"]:hover{
-    border-bottom: 2px solid #fff;
-} */
 
 .login-box input[type="submit"]
 {

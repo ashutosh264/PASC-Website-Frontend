@@ -36,27 +36,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* .login-box input[type="email"], input[type="password"],input[type="text"]
-{
-    border: none;
 
-    background: transparent;
-    outline: none;
-    height: 40px;
-    color: #fff;
-    font-size: 16px;
-    transition: border 0.2s;
-}
-
-.login-box input[type="email"]:hover{
-    border-bottom: 2px solid #fff;
-}
-.login-box input[type="password"]:hover{
-    border-bottom: 2px solid #fff;
-}
-.login-box input[type="text"]:hover{
-    border-bottom: 2px solid #fff;
-} */
 .login-box input[type="submit"] {
   border: none;
   outline: none;

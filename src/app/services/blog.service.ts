@@ -34,6 +34,8 @@ export class BlogService {
   itemDoc: AngularFirestoreDocument<Blog>;
   Galleryitems: any;
   feedback: any;
+  authToken;
+
   // api = "http://localhost:3000";
   api = environment.port;
   constructor(
@@ -43,24 +45,69 @@ export class BlogService {
   ) {}
 
 
+// getUser(){
+//   let headers =  new Headers()
+//   this.loadToken()
+//   const Token = "Bearer " + this.authToken.toString()
+//   console.log(Token)
+//   const decoded = helper.decodeToken(Token);
+//   console.log(decoded.firstname)
+//   const httpOptions = {
+//     headers: new HttpHeaders({
+//       "Content-Type": "application/json",
+//       "Authorization" : Token
+//     })
+//   };
+
+//   return this.http.get(`${this.api}/auth/profile`,  httpOptions )
+// }
+
+loadToken(){
+  const token = localStorage.getItem('idToken')
+  this.authToken = token
+  return token
+}
+
   getBlogs() {
     return this.http.get(`${this.api}/api/blogs`);
   }
   getSelectedBlog(id: string) {
     return this.http.get(`${this.api}/api/blogs/blogdetails/${id}`);
   }
+
   getAdminBlog() {
-    return this.http.get<Blog[]>(`${this.api}/api/blogs/reviewblogs`);
+
+      this.loadToken()
+  const Token = "Bearer " + this.authToken.toString()
+
+   var httpAdmin = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization" : Token
+    })
   }
+  console.log(httpAdmin)
+    return this.http.get<Blog[]>(`${this.api}/api/blogs/reviewblogs` , httpAdmin);
+  }
+
+
   addBlog(data: Blog) {
     return this.http.post(`${this.api}/api/blogs/new`, data, httpOptions);
   }
+
   approveBlog(id: string) {
-    return this.http.put(
-      `${this.api}/api/blogs/reviewblogs/approve/${id}`,
-      httpAdminOptions
-    );
+    this.loadToken()
+    const Token = "Bearer " + this.authToken.toString()
+  
+     var httpAdmin = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization" : Token
+      })
+    }
+    return this.http.get(`${this.api}/api/blogs/reviewblogs/approve/${id}` , httpAdmin);
   }
+
   deleteBlog(id: string) {
     return this.http.delete(
       `${this.api}/api/blogs/admin/delete/${id}`,

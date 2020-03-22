@@ -59,7 +59,7 @@ export class AboutusComponent implements OnInit {
     console.log(a);
     setTimeout(() => {
       window.alert("Feedback Received")
-      window.location.href="/"
+
     }, 1000);
   }
 

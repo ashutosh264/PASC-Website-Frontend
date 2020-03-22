@@ -1,49 +1,57 @@
-
 <br><br><br>
 
-
-  <div >
-    <div class="justify-content-center">
+<div *ngIf= " !signed ">
+<div>
+  <div class="justify-content-center">
     <div class=" container">
       <div class="row ">
-        <div class="col-lg-4 " ></div>
+        <div class="col-lg-4 "></div>
         <div class="col-12 col-lg-4 ">
           <div class="card login-box ">
             <h1>SignUp Here</h1>
-            <form #userRegForm="ngForm" #captchaProtectedForm="ngForm" (ngSubmit)="createUser(userRegForm)">
+            <form name="form" [formGroup]="form" (ngSubmit)="form.valid && createUser()">
 
-              <div>
-                <label for="firstName">First name</label>
-              <input ngModel #firstname="ngModel" name="firstName" type="text" class="form-control" id="firstName">
+              <div class="form-group">
+                <label for="firstname">First name</label>
+                <input type="text" class="form-control" formControlName="firstname"
+                  [ngClass]="{'is-invalid':form.get('firstname').touched && form.get('firstname').invalid}" required />
+             
               </div>
 
-              <div><label for="lastName">Last name</label>
-                <input ngModel #lastname="ngModel" name="lastName" type="text" class="form-control" id="lastName" value=""></div>
-
-                  <div >
-                    <label for="email">Email</label>
-                    <input ngModel #email="ngModel" name="email" type="email" class="form-control">
-                   </div>
-
-              <div>
-                <label for="password">Password</label>
-                <input ngModel #password="ngModel" name="password" type="password" class="form-control">
+              <div class="form-group">
+                <label for="lastname">Last name</label>
+                <input type="text" class="form-control" formControlName="lastname"
+                [ngClass]="{'is-invalid':form.get('lastname').touched && form.get('lastname').invalid}" required />
                 </div>
-                <br>
-                <div class="re" style="text-align: center;">
-                <re-captcha
-                [(ngModel)]="formModel.captcha"
-                name="captcha"
-                required
-                siteKey="6LcrdcoUAAAAADF0yxaH5-lmx7droHzTSn0dwPJO"
-                #captchaControl="ngModel"
-              ></re-captcha>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" formControlName="email" 
+                  [ngClass]="{'is-invalid':form.get('email').touched && form.get('email').invalid}" required/>
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" formControlName="password"
+                  [ngClass]="{'is-invalid':form.get('password').touched && form.get('password').invalid}" required/>
               </div>
               <br>
-              <div [hidden]="!captchaControl.valid"  ><input type="submit" name="submit" value="SignUp" ></div>
 
-                <div class="forgot">
-                <a ><span class="redirect" routerLink="/login">Already Registered? Login Here</span></a>
+              <div class="form-group">
+              <div class="re" style="text-align: center;">
+                <re-captcha name="captcha" siteKey="6LfJReIUAAAAAF87hA7y-TtG6CEsrvw8USx6wXw7
+                "  formControlName="captcha"></re-captcha>
+              </div>
+            </div>
+              <br>
+             
+                <div class="form-group">
+                  <button class="btn btn-primary" [hidden]="!form.valid">SignUp</button>
+                </div>
+             
+
+              <div class="forgot">
+                <a><span class="redirect" routerLink="/login">Already Registered? Login Here</span></a>
                 <br><br>
                 <p class="para"> Or</p> <br>
                 <button type="button" class="btn " (click)="authService.GoogleAuth()">
@@ -52,14 +60,24 @@
                 </button>
               </div>
 
-                </form>
+            </form>
 
-
-            </div>
-            </div>
 
           </div>
         </div>
+
+      </div>
     </div>
-    </div>
+  </div>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div *ngIf="signed">
+
+  <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+</div>
 

@@ -33,10 +33,10 @@
   </div>
 </nav> -->
 
-<div *ngIf="authService.afAuth.authState | async; then authenticatd else guet"></div>
 
 
-<ng-template #guet>
+
+
   <section>
     <nav class="navbar navbar-expand-lg navbar-light  fixed-top top-nav-collapse fill" style="z-index: 1000;">
       <div class="container">
@@ -73,25 +73,33 @@
               <a class="nav-link" routerLink="/achieve" routerLinkActive="active"  ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Achievements</span></a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="authService.islogin()">
               <a class="nav-link" routerLink="/login" routerLinkActive="active"  ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Login</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="authService.islogin()">
               <a class="nav-link" routerLink="/signup" routerLinkActive="active"  ><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">SignUp</span></a>
             </li>
+            <li class="nav-item">
 
+              <li class="nav-item" *ngIf="!authService.islogin()">
+                <a class="nav-link" routerLink="/profile" routerLinkActive="active"><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Profile</span></a>
+              </li>
+              <li class="nav-item" *ngIf="!authService.islogin()">
 
+                <a class="nav-link" (click)="authService.authlogout()" routerLinkActive="active" data-toggle="tooltip"
+                  data-placement="bottom" title="Logout"><i class="fa fa-sign-out" data-toggle="collapse" data-target="#navbarSupportedContent" ></i></a>
+              </li>
 
           </ul>
         </div>
       </div>
     </nav>
   </section>
-</ng-template>
 
 
 
-<ng-template #authenticatd>
+
+<!-- <ng-template #authenticatd>
   <section>
     <nav class="navbar navbar-expand-lg navbar-light  fixed-top top-nav-collapse fill" style="z-index: 1000;">
       <div class="container">
@@ -128,7 +136,6 @@
               <a class="nav-link" routerLink="/achieve" routerLinkActive="active"><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Achievements</span></a>
             </li>
 
-            <!-- add profile avatar with logout and profile dropdown -->
             <ng-container *ngIf="currentUser">
               <li class="nav-item">
                 <a class="nav-link" routerLink="/profile" routerLinkActive="active"><span id="text" data-toggle="collapse" data-target="#navbarSupportedContent">Profile</span></a>
@@ -145,7 +152,7 @@
       </div>
     </nav>
   </section>
-</ng-template>
+</ng-template> -->
 
 <div class="button desktop-only">
   <div class="links">

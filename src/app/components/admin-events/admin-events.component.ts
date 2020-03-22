@@ -11,6 +11,11 @@ import { Observable } from 'rxjs'
 import { AngularFireStorage } from 'angularfire2/storage';
 import { UpcomingService } from 'src/app/services/upcoming.service';
 import { Upcoming } from 'src/app/shared/events';
+import { JwtHelperService } from "@auth0/angular-jwt";
+
+
+const helper = new JwtHelperService();
+
 
 @Component({
   selector: 'app-admin-events',
@@ -30,13 +35,12 @@ export class AdminEventsComponent implements OnInit {
     public upcomingService: UpcomingService,
     private storage : AngularFireStorage,public authService : AuthService , public angularFireAuth : AngularFireAuth,private db: AngularFirestore
   ) { }
-  currentUser : any
+  currentUser;
+  token
   ngOnInit() {
    
-    setTimeout(() => {
-      this.getAdmin()
-     
-    }, 2000);
+     this.token = this.authService.loadToken()
+    this.currentUser = helper.decodeToken(this.token);
     this.upcomingService.getEventFromFirestore().subscribe(item => {this.upcomings = item});
   }
 
