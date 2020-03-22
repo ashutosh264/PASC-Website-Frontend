@@ -1,9 +1,8 @@
 export class Event {
     id ?:string;
-     date: string;
+     date: Date;
      activity: string;
      attendees: number;
      details:string;
      speaker: string;
-     datep: string;
 }

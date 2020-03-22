@@ -17,10 +17,9 @@ export class EventsComponent implements OnInit {
 
   title = 'Events';
 
-  events: Event[];
-  event: Event;
+  events;
 
-  upcomings: Upcoming[];
+  upcomings;
   upcoming: Upcoming;
 
   

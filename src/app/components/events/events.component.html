@@ -82,7 +82,7 @@
       </thead>
       <tbody *ngFor="let event of events">
         <tr>
-          <th scope="row">{{ event.date }}</th>
+          <th scope="row">{{ event.date | date}}</th>
           <td>{{ event.activity }}</td>
           <td>{{ event.attendees }}</td>
           <td>{{ event.details }}</td>

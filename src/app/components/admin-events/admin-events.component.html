@@ -15,7 +15,7 @@
 <br>
 <div class="grid-container">
 <div *ngFor = "let upcoming of upcomings" >
-<div class="card" [routerLink] = "['/adminDetails', upcoming.id]" style="width: 18rem;">
+<div class="card" [routerLink] = "['/adminDetails', upcoming._id]" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">{{upcoming.topic}}</h5>
       <h6 class="card-subtitle mb-2 text-muted"> {{upcoming.date }} </h6>

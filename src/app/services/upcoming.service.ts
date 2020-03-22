@@ -6,6 +6,20 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import {Event} from '../shared/event';
 import { Upcoming } from '../shared/events';
+import {HttpHeaders, HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    "Content-Type " : "application/json"
+  })
+};
+
+const httpAdminOptions = {
+  headers: new HttpHeaders({
+    "Content-Type" : "application/json"
+  })
+}
 
 @Injectable({
   providedIn: 'root'
@@ -19,45 +33,30 @@ export class UpcomingService {
   approveEvent : AngularFirestoreDocument<Upcoming>
   feedback: any;
   constructor( public db: AngularFirestore,
-    public router : Router) {
-      this.itemsCollection = this.db.collection('events',ref=> ref.orderBy("date","desc"))
+    public router : Router,
+    private http: HttpClient) {
      }
 
+     api = environment.port
+
      getEventFromFirestore() {
-      this.items = this.db.collection('events',ref => ref.orderBy('date')).snapshotChanges().pipe(
-        map(changes => {
-          return changes.map(a=> {
-            const data = a.payload.doc.data() as Upcoming
-            data.id = a.payload.doc.id;
-            return data;
-          })
-        })
-      )
-      console.log(this.items);
-      return this.items;
+     return this.http.get(`${this.api}/api/upcoming`);
     }
 
     createE(data: Upcoming) {
-      this.itemsCollection.add(data);
+     return this.http.post(`${this.api}/api/upcoming`,data,httpAdminOptions)
     }
 
-    provideId(id : string)
-    {
-      this.itemDoc = this.db.doc<Upcoming>('events/' + id);
-      this.itemDoc.update({id : id})
-    }
+  
 
     getSelectedEvents(id : string){
-      this.itemDoc = this.db.doc<Upcoming>(`events/${id}`);
-      return this.itemDoc.valueChanges()
+      return this.http.get(`${this.api}/api/upcoming/eventsd/${id}`)
     }
 
 
     delete(id : string)
     {
-      this.itemDoc = this.db.doc<Upcoming>(`events/${id}`);
-      this.itemDoc.delete();
-      this.router.navigate(['events']);
+      return this.http.delete(`${this.api}/api/upcoming/${id}`)
     }
     
 }

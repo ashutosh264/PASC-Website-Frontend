@@ -45,7 +45,7 @@ token;
    
   }
 
-  createUpcoming() {
+  async createUpcoming() {
     const data = {
       topic: this.topic,
       date: this.date,
@@ -53,7 +53,8 @@ token;
     };
 
     this.created= true;
-    this.upcomingService.createE(data)
+   const a = await this.upcomingService.createE(data).subscribe()
+   console.log(a)
     setTimeout(() => {
       this.created = false;
       this.router.navigate(['/events'])

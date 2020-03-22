@@ -40,9 +40,9 @@ export class AdminVdetailsComponent implements OnInit {
     this.token = this.authService.loadToken()
     this.currentUser = helper.decodeToken(this.token);
     
-    const id = this.route.snapshot.params['id'];
+    const id = this.route.snapshot.params["id"];
     this.upcoming = this.upcomingService.getSelectedEvents(id).subscribe(data => this.upcoming = data);
-    this.upcomingService.provideId(id);
+   
 
     // setTimeout(() => {
     //   this.getAdmin()
@@ -53,7 +53,8 @@ export class AdminVdetailsComponent implements OnInit {
   }
 
   deleteEvent(id) {
-    this.upcomingService.delete(id);
+    this.upcomingService.delete(id).subscribe();
+    this.router.navigate(['events']);
   }
 
   getAdmin()

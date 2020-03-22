@@ -7,6 +7,21 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import {Event} from '../shared/event';
 import { Upcoming } from '../shared/events';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment'
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    "Content-Type" : "application/json"
+  })
+};
+
+const httpAdminOptions = { 
+  headers: new HttpHeaders({
+    "Content-Type" : "application/json"
+  })
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,30 +33,25 @@ export class EventService {
   approveEvent : AngularFirestoreDocument<Event>
   feedback: any;
 
+  api = environment.port
+
   constructor(
     public db: AngularFirestore,
-    public router : Router
+    public router : Router,
+    private http: HttpClient
   ) {
     this.itemsCollection = this.db.collection('event',ref=> ref.orderBy("datep","desc"))
 
    }
 
   getEventsFromFirestore() {
-    this.items = this.db.collection('event',ref => ref.orderBy("datep","desc")).snapshotChanges().pipe(
-      map(changes => {
-        return changes.map(a=> {
-          const data = a.payload.doc.data() as Event
-          data.id = a.payload.doc.id;
-          return data;
-        })
-      })
-    )
-    console.log(this.items);
-    return this.items;
+    return this.http.get(`${this.api}/api/events`);
   }
 
+
+
 createE(data: Event) {
-  this.itemsCollection.add(data);
+  return this.http.post(`${this.api}/api/events`, data,httpAdminOptions)
 }
 
 
