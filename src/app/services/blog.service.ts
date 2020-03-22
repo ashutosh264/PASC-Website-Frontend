@@ -41,7 +41,7 @@ export class BlogService {
     public afs: AngularFirestore,
     public router: Router,
     private http: HttpClient
-  ) {}
+  ) { }
 
   // getUser(){
   //   let headers =  new Headers()
@@ -95,18 +95,10 @@ export class BlogService {
   }
 
   approveBlog(id: string) {
-    this.loadToken();
-    const Token = "Bearer " + this.authToken.toString();
 
-    var httpAdmin = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: Token
-      })
-    };
-    return this.http.get(
+    return this.http.put(
       `${this.api}/api/blogs/reviewblogs/approve/${id}`,
-      httpAdmin
+      httpAdminOptions
     );
   }
 
@@ -126,7 +118,7 @@ export class BlogService {
     return this.http.get(`${this.api}/api/projects`);
   }
   addProject(data) {
-    return this.http.post(`${this.api}/projects/new`, data)
+    return this.http.post(`${this.api}/api/projects/new`, data, httpOptions)
   }
   uploadImage(file) {
     const formData = new FormData();
@@ -137,6 +129,9 @@ export class BlogService {
       }
     });
   }
+
+
+  // -----------FIREBASE-------------
 
   getBlogsFromFirestore() {
     this.items = this.afs

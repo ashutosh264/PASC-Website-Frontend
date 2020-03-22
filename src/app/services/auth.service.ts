@@ -104,6 +104,7 @@ export class AuthService {
     this.router.navigate(["login"]);
   }
 
+  
   // getUser(){
   //   let headers =  new Headers()
   //   this.loadToken()
