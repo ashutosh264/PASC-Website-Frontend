@@ -62,6 +62,7 @@ import { AchieveComponent } from './components/achieve/achieve.component';
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { NewprojectComponent } from './components/newproject/newproject.component';
 
 
 
@@ -100,6 +101,7 @@ import { HttpClientModule } from '@angular/common/http';
     AdminFeedbackComponent,
     FooterComponent,
     AchieveComponent,
+    NewprojectComponent
   ],
   imports: [
     BrowserModule,

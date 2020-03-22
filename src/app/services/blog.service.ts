@@ -11,8 +11,7 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { HttpHeaders } from "@angular/common/http";
-import {environment} from '../../environments/environment';
-
+import { environment } from "../../environments/environment";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -44,29 +43,28 @@ export class BlogService {
     private http: HttpClient
   ) {}
 
+  // getUser(){
+  //   let headers =  new Headers()
+  //   this.loadToken()
+  //   const Token = "Bearer " + this.authToken.toString()
+  //   console.log(Token)
+  //   const decoded = helper.decodeToken(Token);
+  //   console.log(decoded.firstname)
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       "Content-Type": "application/json",
+  //       "Authorization" : Token
+  //     })
+  //   };
 
-// getUser(){
-//   let headers =  new Headers()
-//   this.loadToken()
-//   const Token = "Bearer " + this.authToken.toString()
-//   console.log(Token)
-//   const decoded = helper.decodeToken(Token);
-//   console.log(decoded.firstname)
-//   const httpOptions = {
-//     headers: new HttpHeaders({
-//       "Content-Type": "application/json",
-//       "Authorization" : Token
-//     })
-//   };
+  //   return this.http.get(`${this.api}/auth/profile`,  httpOptions )
+  // }
 
-//   return this.http.get(`${this.api}/auth/profile`,  httpOptions )
-// }
-
-loadToken(){
-  const token = localStorage.getItem('idToken')
-  this.authToken = token
-  return token
-}
+  loadToken() {
+    const token = localStorage.getItem("idToken");
+    this.authToken = token;
+    return token;
+  }
 
   getBlogs() {
     return this.http.get(`${this.api}/api/blogs`);
@@ -76,36 +74,40 @@ loadToken(){
   }
 
   getAdminBlog() {
+    this.loadToken();
+    const Token = "Bearer " + this.authToken.toString();
 
-      this.loadToken()
-  const Token = "Bearer " + this.authToken.toString()
-
-   var httpAdmin = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      "Authorization" : Token
-    })
+    var httpAdmin = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: Token
+      })
+    };
+    console.log(httpAdmin);
+    return this.http.get<Blog[]>(
+      `${this.api}/api/blogs/reviewblogs`,
+      httpAdmin
+    );
   }
-  console.log(httpAdmin)
-    return this.http.get<Blog[]>(`${this.api}/api/blogs/reviewblogs` , httpAdmin);
-  }
-
 
   addBlog(data: Blog) {
     return this.http.post(`${this.api}/api/blogs/new`, data, httpOptions);
   }
 
   approveBlog(id: string) {
-    this.loadToken()
-    const Token = "Bearer " + this.authToken.toString()
-  
-     var httpAdmin = {
+    this.loadToken();
+    const Token = "Bearer " + this.authToken.toString();
+
+    var httpAdmin = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        "Authorization" : Token
+        Authorization: Token
       })
-    }
-    return this.http.get(`${this.api}/api/blogs/reviewblogs/approve/${id}` , httpAdmin);
+    };
+    return this.http.get(
+      `${this.api}/api/blogs/reviewblogs/approve/${id}`,
+      httpAdmin
+    );
   }
 
   deleteBlog(id: string) {
@@ -120,9 +122,15 @@ loadToken(){
   getFeed() {
     return this.http.get(`${this.api}/feedback/feedback`);
   }
+  getProjects() {
+    return this.http.get(`${this.api}/api/projects`);
+  }
+  addProject(data) {
+    return this.http.post(`${this.api}/projects/new`, data)
+  }
   uploadImage(file) {
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
     return this.http.post(`${this.api}/thumbnail/upload`, formData, {
       headers: {
         "Content-Type": file.type
@@ -130,14 +138,6 @@ loadToken(){
     });
   }
 
-
-
-
-
-
-
-
-  
   getBlogsFromFirestore() {
     this.items = this.afs
       .collection("blogs", ref => ref.orderBy("date", "desc"))
