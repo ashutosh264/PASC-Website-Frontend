@@ -19,12 +19,11 @@ import { Time } from '@angular/common';
 })
 export class TableComponent implements OnInit {
 
-  date: string;
+  date: Date;
   activity: string;
   attendees: number;
   details:string;
   speaker: string;
-  datep: string;
   created: boolean;
 
   constructor(
@@ -39,18 +38,18 @@ export class TableComponent implements OnInit {
     
   }
 
-  createEvent() {
+ async createEvent() {
     const data = {
       date: this.date,
       activity: this.activity,
       attendees: this.attendees,
       details: this.details,
       speaker: this.speaker,
-      datep: this.datep,
     };
 
     this.created = true;
-    this.eventService.createE(data)
+    const a = await this.eventService.createE(data).subscribe()
+    console.log(a)
     setTimeout(() => {
       this.created = false;
       this.router.navigate(['/events']);

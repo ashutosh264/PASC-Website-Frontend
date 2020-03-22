@@ -8,12 +8,8 @@
  <div class="container" >
 
   <div>
-    <mat-form-field>
-    <input matInput placeholder="Date (month date, Year)" [(ngModel)] = "date" class="input-field" >
-  </mat-form-field>
-
   <mat-form-field>
-    <input matInput [matDatepicker]="myDatepicker" placeholder="Date(please update in calender)" [(ngModel)] = "datep">
+    <input matInput [matDatepicker]="myDatepicker" placeholder="Date(please update in calender)" [(ngModel)] = "date">
     <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
     <mat-datepicker #myDatepicker></mat-datepicker>
   </mat-form-field>
@@ -33,8 +29,7 @@
           </mat-form-field>
 
 
-          <button mat-raised-button color="blue" class="btn btn-primary m-4" (click)="createEvent()"
-          [disabled]="!date || !activity || !details">Create Event</button>
+          <button mat-raised-button color="blue" class="btn btn-primary m-4" (click)="createEvent()">Create Event</button>
   </div>
 
 </div> 

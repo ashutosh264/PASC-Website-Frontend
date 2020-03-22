@@ -23,7 +23,7 @@ const helper = new JwtHelperService();
   styleUrls: ['./admin-events.component.css']
 })
 export class AdminEventsComponent implements OnInit {
-  upcomings: Upcoming[];
+  upcomings;
   upcoming: Upcoming;
 
   constructor(
