@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ElementRef } from "@angular/core";
+import { BlogService } from "../../services/blog.service";
 
 import { EventService } from '../../services/event.service';
 import { Title } from '@angular/platform-browser';
@@ -13,14 +14,22 @@ export class AchieveComponent implements OnInit {
   title = 'Achievements'
 
   constructor(private elementRef: ElementRef,
+    private blogService: BlogService,
     private titleService: Title) { }
-
+    projects;
+    mpro;
   ngOnInit() {
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = "../../../assets/scripts/AOS.js";
+    this.blogService.getProjects().subscribe(item => {
+      this.projects = item
+    });
     this.elementRef.nativeElement.appendChild(s);
     this.titleService.setTitle(this.title);
+    console.log(this.projects)
   }
-
+  passData(pro) {
+    this.mpro = pro
+  }
 }

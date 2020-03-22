@@ -1,0 +1,68 @@
+<br /><br />
+<div class="m-5"></div>
+<div class="container" style="margin-top:100px ;">
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Project Title"
+      [(ngModel)]="heading"
+      class="input-field custom-field"
+    />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Github Link"
+      [(ngModel)]="gitlink"
+      class="input-field custom-field"
+    />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="Category"
+      [(ngModel)]="category"
+      class="input-field custom-field"
+    />
+  </mat-form-field>
+  <br />
+  <ckeditor
+    [editor]="Editor"
+    [(ngModel)]="content"
+    data="<p>Hello, world!</p>"
+    tagName="textarea"
+    [config]="{
+      toolbar: [
+        'heading',
+        '|',
+        'bold',
+        'italic',
+        'link',
+        'bulletedlist',
+        'numberedlist',
+        'blockquote',
+        'inserttable',
+        'undo',
+        'redo'
+      ]
+    }"
+  >
+  </ckeditor>
+  <br />
+
+  <div [hidden]="!created">
+    <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
+  </div>
+  <div *ngIf="!valid">Not Valid</div>
+  <button
+    mat-raised-button
+    color="blue"
+    class="btn btn-primary m-4"
+    (click)="createProject()"
+    [disabled]="!heading || !gitlink || !content || !category"
+  >
+    Create Project
+  </button>
+</div>
