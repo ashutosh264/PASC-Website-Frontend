@@ -42,7 +42,7 @@ const routes: Routes = [
   {path : 'achieve', component : AchieveComponent },
   {path : 'blogs', component : BlogListComponent },
   {path : 'blogdetail/:id', component : BlogDetailComponent},
-  {path : 'project/new', component : NewprojectComponent},
+  {path : 'project/new', component : NewprojectComponent , canActivate : [AuthGuard]},
   {path : 'new', component : NewBlogComponent, canActivate : [AuthGuard] },
   {path : 'reviewblogs', component : AdminComponent, canActivate : [AuthGuard]},
   {path : 'profile', component : ProfileComponent, canActivate : [AuthGuard]}, 

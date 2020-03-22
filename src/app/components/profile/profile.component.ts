@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
     this.User = helper.decodeToken(this.token);
     this.titleService.setTitle(this.User.firstname + " " + this.User.lastname);
     
-    console.log(this.title);
+   
   }
 
   
