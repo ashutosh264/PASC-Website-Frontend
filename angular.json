@@ -25,10 +25,13 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/font-awesome/css/font-awesome.min.css" ,              "src/custom-theme.scss",
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "src/custom-theme.scss",
               "src/styles.css"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js"]
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -124,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "pasc-blogs"
+  "defaultProject": "pasc-blogs",
+  "cli": {
+    "analytics": "96d3a0a0-b92e-4891-8bb8-72112a3dc1db"
+  }
 }
