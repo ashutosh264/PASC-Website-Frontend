@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from "../../environments/environment";
 
-
+const httpOptions = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json"
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
   authToken;
-  url = 'https://localhost:3443/api/projects'
+  url ='http://localhost:3000/api/projects'
 
 
   constructor(private http: HttpClient) { }
 
 
   loadToken(){
-    return localStorage.getItem('token')
+    return localStorage.getItem('idToken')
   }
  
   getAllUnapprovedProjects(){
     this.authToken = this.loadToken()
-    var token = 'Bearer ' + this.authToken.toString();
+    var token = "Bearer " + this.authToken.toString();
     var httpAdmin = {
       headers : new HttpHeaders({
-        "Content-Type": "application/json",
         "Authorization": token
       })
     }

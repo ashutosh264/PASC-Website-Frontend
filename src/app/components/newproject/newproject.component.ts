@@ -37,32 +37,52 @@ export class NewprojectComponent implements OnInit {
 
   currentUser;
   token;
-  ngOnInit() {
-  
+  isLogin;
+
+  async ngOnInit() {
+
     this.token = this.authService.loadToken()
     this.currentUser = helper.decodeToken(this.token);
     this.titleService.setTitle(this.title);
+
+    if (this.token) {
+      (await this.authService.islogged()).subscribe(res => {
+        this.isLogin = res
+      })
+    }
+
   }
 
   async createProject() {
-    const data = {
-      content: this.content,
-      heading: this.heading,
-      link: this.gitlink,
-      date: new Date().toISOString(),
-      category: this.category,
-      author: {
-        author_name: this.currentUser.firstname + " " + this.currentUser.lastname
-      },
-      approve: false
-    };
-    this.created = true;
-    const a = await this.blogService.addProject(data).subscribe();
-    console.log(a);
-    window.alert('Project Submitted For Evaluation');
-    setTimeout(() => {
-      this.created = false;
-      this.router.navigate(["/achieve"]);
-    }, 1800);
+
+    if (this.isLogin) {
+      const data = {
+        content: this.content,
+        heading: this.heading,
+        link: this.gitlink,
+        date: new Date().toISOString(),
+        category: this.category,
+        author: {
+          author_name: this.currentUser.firstname + " " + this.currentUser.lastname
+        },
+        approve: false
+      };
+      this.created = true;
+      const a = await this.blogService.addProject(data).subscribe();
+      console.log(a);
+      window.alert('Project Submitted For Evaluation');
+      setTimeout(() => {
+        this.created = false;
+        this.router.navigate(["/achieve"]);
+      }, 1000);
+    }
+
+    else {
+      window.alert(" Stop Using JWT TOKEN to login in !! ")
+      localStorage.clear();
+      this.router.navigate(["login"]);
+
+    }
+
   }
 }

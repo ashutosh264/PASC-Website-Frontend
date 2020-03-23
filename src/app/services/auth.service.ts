@@ -17,6 +17,9 @@ import { environment } from "../../environments/environment";
 import { timeout } from "rxjs/operators";
 import * as jwt_decode from "jwt-decode";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { CookieService } from 'ngx-cookie-service';
+
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -44,14 +47,15 @@ export class AuthService {
   result;
   ans;
   authToken;
-  authUser;
+  logoutUser;
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone,
-    private http: HttpClient
+    private http: HttpClient,
+    public cookie: CookieService
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -74,9 +78,15 @@ export class AuthService {
     return this.http.post(`${this.api}/auth/login`, user, httpOptions);
   }
 
-  authGoogle() {
+  async authGoogle() {
     console.log("google auth");
-    this.http.get(`${this.api}/auth/google`);
+    window.location.href='http://localhost:3000/auth/google';
+  }
+
+  async loginGoogle(id:string){
+
+    return await this.http.post(`${this.api}/auth/authgoogle`, { id }  ,httpOptions);
+    
   }
 
   islogin() {
@@ -91,36 +101,68 @@ export class AuthService {
   }
 
   storeToken(token) {
-    console.log(token);
     localStorage.setItem("idToken", token);
     this.authToken = token;
   }
 
   authlogout() {
+
+    this.logoutUser = helper.decodeToken(this.authToken);
     this.authToken = null;
-    this.authUser = null;
     localStorage.clear();
+
+    if(this.logoutUser.errgol){
+      this.http.get(`${this.api}/auth/google/logout`,  httpOptions )
+    }
+
     window.alert(" Logout Successfull !!");
     this.router.navigate(["login"]);
+
   }
 
   
-  // getUser(){
-  //   let headers =  new Headers()
-  //   this.loadToken()
-  //   const Token = "Bearer " + this.authToken.toString()
-  //   console.log(Token)
-  //   const decoded = helper.decodeToken(Token);
-  //   console.log(decoded.firstname)
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       "Content-Type": "application/json",
-  //       "Authorization" : Token
-  //     })
-  //   };
+  async islogged(){
 
-  //   return this.http.get(`${this.api}/auth/profile`,  httpOptions )
-  // }
+    var authLog
+    this.loadToken()
+
+    const Token = "Bearer " + this.authToken.toString()
+    const decoded = helper.decodeToken(Token);
+
+    const httpOptions1 = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization" : Token
+      })
+    };
+
+    return await this.http.get(`${this.api}/auth/islogin`,  httpOptions1 )
+   
+  }
+
+
+  async isadmin(){
+
+    var authLog
+    this.loadToken()
+
+    const Token = "Bearer " + this.authToken.toString()
+    const decoded = helper.decodeToken(Token);
+
+    const httpOptions1 = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization" : Token
+      })
+    };
+
+    return await this.http.get(`${this.api}/auth/admin`,  httpOptions1 )
+   
+  }
+
+
+// -----------------------Firebase-------------------------
+
 
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());

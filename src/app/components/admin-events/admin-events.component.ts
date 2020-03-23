@@ -35,12 +35,21 @@ export class AdminEventsComponent implements OnInit {
     public upcomingService: UpcomingService,
     private storage : AngularFireStorage,public authService : AuthService , public angularFireAuth : AngularFireAuth,private db: AngularFirestore
   ) { }
-  currentUser;
+  currentUser ;
+  item: any;
   token
-  ngOnInit() {
+  isAdmin;
+  async ngOnInit() {
    
      this.token = this.authService.loadToken()
-    this.currentUser = helper.decodeToken(this.token);
+    this.currentUser=false;
+
+    if (this.token) {
+      (await this.authService.isadmin()).subscribe(res => {
+        this.isAdmin = res
+        this.currentUser = this.isAdmin.admin
+      })
+    }
     this.upcomingService.getEventFromFirestore().subscribe(item => {this.upcomings = item});
   }
 

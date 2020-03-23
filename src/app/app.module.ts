@@ -69,7 +69,8 @@ import { NewprojectComponent } from './components/newproject/newproject.componen
 import { AdminProjectsComponent } from './components/admin-projects/admin-projects.component';
 
 import { BasicAuthInterceptor} from './shared/interceptor';
-
+import { CookieService } from 'ngx-cookie-service';
+import { GoogleOauthComponent } from './components/google-oauth/google-oauth.component';
 
 
 
@@ -111,6 +112,7 @@ import { BasicAuthInterceptor} from './shared/interceptor';
     AchieveComponent,
     NewprojectComponent,
     AdminProjectsComponent,
+    GoogleOauthComponent,
   ],
   imports: [
     BrowserModule,
@@ -140,7 +142,8 @@ import { BasicAuthInterceptor} from './shared/interceptor';
     RecaptchaFormsModule,
     FlashMessagesModule
   ],
-  providers: [
+  providers: [CookieService
+  
     // { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

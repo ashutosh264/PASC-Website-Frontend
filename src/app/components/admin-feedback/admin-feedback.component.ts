@@ -20,7 +20,6 @@ const helper = new JwtHelperService();
 })
 export class AdminFeedbackComponent implements OnInit {
   feedback;
-  currentUser: any;
 
   constructor(
     private blogService: BlogService,
@@ -28,12 +27,21 @@ export class AdminFeedbackComponent implements OnInit {
     public authService:AuthService,
     public afs: AngularFirestore
   ) {}
-  token;
-  ngOnInit() {
+  currentUser ;
+  item: any;
+  token
+  isAdmin;
+  async ngOnInit() {
    
      this.token = this.authService.loadToken()
-    this.currentUser = helper.decodeToken(this.token);
+    this.currentUser=false;
 
+    if (this.token) {
+      (await this.authService.isadmin()).subscribe(res => {
+        this.isAdmin = res
+        this.currentUser = this.isAdmin.admin
+      })
+    }
     this.blogService.getFeed().subscribe(item => {
       this.feedback = item;
     });

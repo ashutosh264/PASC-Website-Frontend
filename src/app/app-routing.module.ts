@@ -31,6 +31,7 @@ import { AchieveComponent } from './components/achieve/achieve.component';
 
 import { NewprojectComponent } from './components/newproject/newproject.component';
 import { AdminProjectsComponent } from './components/admin-projects/admin-projects.component';
+import { GoogleOauthComponent } from './components/google-oauth/google-oauth.component';
 
 
 
@@ -61,7 +62,7 @@ const routes: Routes = [
   {path: 'table', component: TableComponent, canActivate: [AuthGuard]},
   {path: 'feedback', component: AdminFeedbackComponent, canActivate: [AuthGuard]},
   {path : 'adminDetails/:id' , component : AdminVdetailsComponent, canActivate : [ AuthGuard ]},
-
+  {path: 'bWsXeYHAPgFkIQTA8Bx5twAePYssw9BUOBc67BCItJW71OQzqVuqx4ooD5Eog8slSOV5z', component: GoogleOauthComponent  , canActivate: [SecureInnerPagesGuard]},
   {path:'projects', component: AdminProjectsComponent, canActivate: [AuthGuard]},
 
 

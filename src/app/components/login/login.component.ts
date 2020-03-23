@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from "@angular/router";
 import { Local } from 'protractor/built/driverProviders';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -34,7 +35,11 @@ export class LoginComponent implements OnInit {
   clicked = false;
   result;
   signed:Boolean;
-  constructor(public authService : AuthService,public router: Router, private elementRef:ElementRef ,  private titleService: Title)  { }
+  constructor(public authService : AuthService,
+    public router: Router, 
+    private elementRef:ElementRef , 
+     private titleService: Title,
+     public cookie: CookieService)  { }
 
   ngOnInit() {
     
@@ -45,6 +50,8 @@ export class LoginComponent implements OnInit {
     })
     this.signed=false
    
+
+
 
     // this.clicked=false;
     // var s = document.createElement("script");
@@ -66,6 +73,7 @@ export class LoginComponent implements OnInit {
       setTimeout(() => {
         this.router.navigate(['blogs']);
       }, 1000);
+      
      }
     else{
       window.alert(this.result.error)

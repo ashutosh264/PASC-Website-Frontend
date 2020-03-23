@@ -19,15 +19,21 @@ export class AdminPanelComponent implements OnInit {
 
   blogs : Blog[]
   constructor(public afs: AngularFirestore,public authService : AuthService, public angularFireAuth : AngularFireAuth) { }
-  User;
-  currentUser : any
+  currentUser ;
   item: any;
-  token;
-  ngOnInit() {
-  
-    this.token = this.authService.loadToken()
-    this.currentUser = helper.decodeToken(this.token);
-  
+  token
+  isAdmin;
+  async ngOnInit() {
+   
+     this.token = this.authService.loadToken()
+    this.currentUser=false;
+
+    if (this.token) {
+      (await this.authService.isadmin()).subscribe(res => {
+        this.isAdmin = res
+        this.currentUser = this.isAdmin.admin
+      })
+    }
     
   }
   

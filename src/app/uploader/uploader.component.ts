@@ -21,17 +21,26 @@ export class UploaderComponent {
   isHovering: boolean;
 
   files: File[] = [];
-  currentUser : any ;
   selected: number = 1;
 
   constructor(private storage: AngularFireStorage,
      private db: AngularFirestore , public authService:AuthService,  
      public angularFireAuth : AngularFireAuth,public router : Router) { }
-  token;
-  ngOnInit() {
-  
-    this.token = this.authService.loadToken()
-    this.currentUser = helper.decodeToken(this.token);
+     currentUser ;
+
+     token
+     isAdmin;
+     async ngOnInit() {
+      
+        this.token = this.authService.loadToken()
+       this.currentUser=false;
+   
+       if (this.token) {
+         (await this.authService.isadmin()).subscribe(res => {
+           this.isAdmin = res
+           this.currentUser = this.isAdmin.admin
+         })
+       }
    
     // setTimeout(() => {
     //   this.getAdmin()
