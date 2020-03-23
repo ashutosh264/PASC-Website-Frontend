@@ -122,29 +122,46 @@ export class AuthService {
 
   
   async islogged(){
+
     var authLog
     this.loadToken()
+
     const Token = "Bearer " + this.authToken.toString()
-    console.log(Token)
     const decoded = helper.decodeToken(Token);
-    console.log(decoded.firstname)
-    const httpOptions = {
+
+    const httpOptions1 = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         "Authorization" : Token
       })
     };
 
-    await this.http.get(`${this.api}/auth/islogin`,  httpOptions ).subscribe(
-     res=>{
-       authLog=res
-     }
-   )
-    return authLog.login
+    return await this.http.get(`${this.api}/auth/islogin`,  httpOptions1 )
+   
   }
 
 
-// ---------------Firebase-----------
+  async isadmin(){
+
+    var authLog
+    this.loadToken()
+
+    const Token = "Bearer " + this.authToken.toString()
+    const decoded = helper.decodeToken(Token);
+
+    const httpOptions1 = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization" : Token
+      })
+    };
+
+    return await this.http.get(`${this.api}/auth/admin`,  httpOptions1 )
+   
+  }
+
+
+// -----------------------Firebase-------------------------
 
 
   GoogleAuth() {

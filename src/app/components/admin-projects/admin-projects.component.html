@@ -1,5 +1,6 @@
 <br>
 <br><br><br><br><br>
+<div *ngIf="currentUser">
 <div class="container">
     <div class="row" *ngIf="projects.length != 0">
         <!-- <div class="col-md-4 col-sm-6">
@@ -72,5 +73,13 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+</div>
+
+<div *ngIf="!currentUser">
+    <br><br>
+    <div style="text-align: center;">
+        <img src="../../../assets/images/avc/error-404-found-glitch-effect_8024-4.jpg" alt="">
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class="container" >
   <br><br><br><br>
-<div *ngIf="currentUser.admin">
+<div *ngIf="currentUser">
   <div class="container">
     <div *ngIf="blogs">
       <div class="row">
@@ -22,7 +22,7 @@
   </div>
 </div>
 
-<div *ngIf="!currentUser.admin" >
+<div *ngIf="!currentUser" >
   <br><br>
   <div style="text-align: center;">
   <img src="../../../assets/images/avc/error-404-found-glitch-effect_8024-4.jpg" alt="">

@@ -32,13 +32,21 @@ export class AdminVdetailsComponent implements OnInit {
     public upcomingService: UpcomingService
   ) { }
 
+  currentUser ;
 
-  currentUser : any
-  token;
-  ngOnInit() {
-  
-    this.token = this.authService.loadToken()
-    this.currentUser = helper.decodeToken(this.token);
+  token
+  isAdmin;
+  async ngOnInit() {
+   
+     this.token = this.authService.loadToken()
+    this.currentUser=false;
+
+    if (this.token) {
+      (await this.authService.isadmin()).subscribe(res => {
+        this.isAdmin = res
+        this.currentUser = this.isAdmin.admin
+      })
+    }
     
     const id = this.route.snapshot.params['id'];
     this.upcoming = this.upcomingService.getSelectedEvents(id).subscribe(data => this.upcoming = data);

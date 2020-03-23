@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { ProjectService } from 'src/app/services/project.service';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-admin-projects',
@@ -11,9 +11,24 @@ import { Router } from '@angular/router';
 export class AdminProjectsComponent implements OnInit {
   modalProject = null
   projects:any = []
-  constructor(private pS: ProjectService,private router: Router) { }
+  constructor(private pS: ProjectService,
+    public authService : AuthService,
+    private router: Router) { }
+  currentUser ;
 
-  ngOnInit() {
+  token
+  isAdmin;
+  async ngOnInit() {
+   
+     this.token = this.authService.loadToken()
+    this.currentUser=false;
+
+    if (this.token) {
+      (await this.authService.isadmin()).subscribe(res => {
+        this.isAdmin = res
+        this.currentUser = this.isAdmin.admin
+      })
+    }
   this.projects = []
     this.getAllProjects()
     this.modalProject = null

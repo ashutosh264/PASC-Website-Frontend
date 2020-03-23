@@ -34,9 +34,21 @@ export class TableComponent implements OnInit {
     public eventService:EventService,
     private storage : AngularFireStorage,public authService : AuthService , public angularFireAuth : AngularFireAuth,private db: AngularFirestore
   ) { }
+  currentUser ;
 
-  ngOnInit() {
-    
+  token
+  isAdmin;
+  async ngOnInit() {
+   
+     this.token = this.authService.loadToken()
+    this.currentUser=false;
+
+    if (this.token) {
+      (await this.authService.isadmin()).subscribe(res => {
+        this.isAdmin = res
+        this.currentUser = this.isAdmin.admin
+      })
+    }
   }
 
   createEvent() {

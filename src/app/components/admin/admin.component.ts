@@ -20,13 +20,22 @@ export class AdminComponent implements OnInit {
   blogs : Blog[]
   constructor(private blogService : BlogService, public afs: AngularFirestore,public authService : AuthService, public angularFireAuth : AngularFireAuth,public router : Router) { }
   User;
-  currentUser : any
+
+  currentUser ;
   item: any;
   token
-  ngOnInit() {
+  isAdmin;
+  async ngOnInit() {
    
      this.token = this.authService.loadToken()
-    this.currentUser = helper.decodeToken(this.token);
+    this.currentUser=false;
+
+    if (this.token) {
+      (await this.authService.isadmin()).subscribe(res => {
+        this.isAdmin = res
+        this.currentUser = this.isAdmin.admin
+      })
+    }
 
     this.blogService.getAdminBlog().subscribe(item => {this.blogs = item})
     // setTimeout(() => {

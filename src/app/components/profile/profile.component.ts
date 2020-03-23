@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
     title= 'Profile';
   ngOnInit() {
 
+    console.log( this.authService.islogged())
     //   this.authService.getUser().subscribe( res=>{
     //   this.result=res
     //   this.User = this.result.user;
