@@ -14,7 +14,7 @@ import { authUser } from "../shared/authUser";
 import { HttpClient } from "@angular/common/http";
 import { HttpHeaders } from "@angular/common/http";
 import { environment } from "../../environments/environment";
-import { timeout } from "rxjs/operators";
+import { timeout, windowTime } from "rxjs/operators";
 import * as jwt_decode from "jwt-decode";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { CookieService } from 'ngx-cookie-service';
@@ -160,6 +160,19 @@ export class AuthService {
    
   }
 
+  // forgot password
+  forgotPassword(email){
+     return this.http.post(`${this.api}/resetpassword/recover`, { email: email })
+  }
+  verifyTokenExpiry(id){
+    return this.http.get(`${this.api}/resetpassword/reset/${id}`);
+  }
+  checkId(id){
+    return this.http.get(`${this.api}/resetpassword/${id}`)
+  }
+  sendNewPassword(pass,id){
+    return this.http.post(`${this.api}/resetpassword/reset/${id}`,{password:pass})
+  }
 
 // -----------------------Firebase-------------------------
 
@@ -261,7 +274,6 @@ export class AuthService {
   createUser(user) {
     this.afAuth.auth
       .createUserWithEmailAndPassword(user.email, user.password)
-
       .then(async userCredential => {
         this.newUser = user;
         await this.afAuth.auth.currentUser.sendEmailVerification();
