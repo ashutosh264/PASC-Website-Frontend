@@ -54,7 +54,6 @@ export class NewprojectComponent implements OnInit {
   }
 
   async createProject() {
-
     if (this.isLogin) {
       const data = {
         content: this.content,

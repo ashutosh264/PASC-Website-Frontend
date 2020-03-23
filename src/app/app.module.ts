@@ -71,6 +71,7 @@ import { AdminProjectsComponent } from './components/admin-projects/admin-projec
 import { BasicAuthInterceptor} from './shared/interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { GoogleOauthComponent } from './components/google-oauth/google-oauth.component';
+import { ForgotRedirectComponent } from './components/forgot-redirect/forgot-redirect.component';
 
 
 
@@ -113,6 +114,7 @@ import { GoogleOauthComponent } from './components/google-oauth/google-oauth.com
     NewprojectComponent,
     AdminProjectsComponent,
     GoogleOauthComponent,
+    ForgotRedirectComponent,
   ],
   imports: [
     BrowserModule,
