@@ -1,48 +1,54 @@
-<br><br><br>
+<br /><br /><br />
 <div *ngIf="currentUser">
-  <br><br>
+  <br /><br />
 
   <div class="container">
     <article>
-     
       <h2><span>Select a Album:</span></h2>
       <select (change)="selectChangeHandler($event)">
-          <option value="1">Pulzion</option>
-          <option value="2">Rad , Pascathon</option>
-          <option value="3">Hour of code</option>
-          <option value="4">ACM-W</option>
-          <option value="5">Coding Ninjas</option>
-          <option value="6">Sig</option>
-          <option value="7">Winter , DAta</option>
-          <option value="8"> ESP </option>
+        <option value="1">Pulzion</option>
+        <option value="2">Rad , Pascathon</option>
+        <option value="3">Hour of code</option>
+        <option value="4">ACM-W</option>
+        <option value="5">Coding Ninjas</option>
+        <option value="6">Sig</option>
+        <option value="7">Winter , DAta</option>
+        <option value="8"> ESP </option>
       </select>
-      <p><span>You selected: </span><b>{{selected}}</b></p>
-  </article>
-  
+      <p>
+        <span>You selected: </span><b>{{ selected }}</b>
+      </p>
+    </article>
+
     <h3>Uploads</h3>
-  
   </div>
 
-<br><br>
+  <br /><br />
 
-
-  <div class="dropzone" dropzone (hovered)="toggleHover($event)" (dropped)="onDrop($event)"
-    [class.hovering]="isHovering">
-
-
-    <h3>AngularFire Drop Zone</h3>
+  <div
+    *ngIf="done"
+    class="dropzone"
+    dropzone
+    (hovered)="toggleHover($event)"
+    (dropped)="onDrop($event)"
+    [class.hovering]="isHovering"
+  >
+    <h3>Drop Zone</h3>
     <p>Drag and Drop a File</p>
+    <p>{{nofiles}} files uploaded</p>
   </div>
 
-  
-  <div *ngFor="let file of files">
-    <upload-task [file]="file" [selected]="selected"></upload-task>
+  <div [hidden]="done">
+    <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
   </div>
 </div>
 
-<div *ngIf="!currentUser" >
-  <br><br>
+<div *ngIf="!currentUser">
+  <br /><br />
   <div style="text-align: center;">
-  <img src="../../assets/images/avc/error-404-found-glitch-effect_8024-4.jpg" alt="">
+    <img
+      src="../../assets/images/avc/error-404-found-glitch-effect_8024-4.jpg"
+      alt=""
+    />
   </div>
-  </div>
+</div>

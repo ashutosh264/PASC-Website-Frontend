@@ -1,33 +1,87 @@
-<br><br>
+<br /><br />
 <div class="m-5"></div>
 <div class="container" style="margin-top:100px ;">
   <div>
-    <input type="file" name="file" id="file" class="btn" (change)="uploadImage($event)" required>
+    <form (ngSubmit)="onSubmit($event)">
+      <input
+        type="file"
+        name="photo"
+        id="photo"
+        class="btn"
+        (change)="uploadImage($event)"
+        required
+      />
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
     <div [hidden]="!uploadPer">
-      <mat-progress-bar mode="determinate" value="{{uploadPer | async}}"></mat-progress-bar>
+      <mat-progress-bar
+        mode="determinate"
+        value="{{ uploadPer | async }}"
+      ></mat-progress-bar>
     </div>
   </div>
   <mat-form-field>
-    <input matInput placeholder="Post Title" [(ngModel)]="heading" class="input-field">
+    <input
+      matInput
+      placeholder="Post Title"
+      [(ngModel)]="heading"
+      class="input-field"
+    />
   </mat-form-field>
-  <br>
+  <br />
   <mat-form-field>
-    <input matInput placeholder="Sub-Heading" [(ngModel)]="subHeading" class="input-field">
+    <input
+      matInput
+      placeholder="Sub-Heading"
+      [(ngModel)]="subHeading"
+      class="input-field"
+    />
   </mat-form-field>
-  <br>
+  <br />
   <mat-form-field>
-    <input matInput placeholder="Category" [(ngModel)]="category" class="input-field">
+    <input
+      matInput
+      placeholder="Category"
+      [(ngModel)]="category"
+      class="input-field"
+    />
   </mat-form-field>
-  <br>
-  <ckeditor [editor]="Editor" [(ngModel)]="content" data="<p>Hello, world!</p>" tagName="textarea"
-    [config]="{ toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedlist', 'numberedlist', 'blockquote', 'inserttable', 'undo', 'redo' ] }">
+  <br />
+  <ckeditor
+    [editor]="Editor"
+    [(ngModel)]="content"
+    data="<p>Hello, world!</p>"
+    tagName="textarea"
+    [config]="{
+      toolbar: [
+        'heading',
+        '|',
+        'bold',
+        'italic',
+        'link',
+        'bulletedlist',
+        'numberedlist',
+        'blockquote',
+        'inserttable',
+        'undo',
+        'redo'
+      ]
+    }"
+  >
   </ckeditor>
-  <br>
+  <br />
 
   <div [hidden]="!created">
     <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
   </div>
   <div *ngIf="!valid">Not Valid</div>
-  <button mat-raised-button color="blue" class="btn btn-primary m-4" (click)="createPost()"
-    [disabled]="!heading || !subHeading || !content || !category">Create Post</button>
+  <button
+    mat-raised-button
+    color="blue"
+    class="btn btn-primary m-4"
+    (click)="createPost()"
+    [disabled]="!heading || !subHeading || !content || !category"
+  >
+    Create Post
+  </button>
 </div>

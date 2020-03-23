@@ -11,6 +11,8 @@ import { Title } from "@angular/platform-browser";
 export class BlogComponent implements OnInit {
   @Input()
   blog;
+  api = 'http://localhost:3000'
+
   constructor(private elementRef: ElementRef, private titleService: Title) {}
 
   ngOnInit() {
