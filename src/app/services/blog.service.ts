@@ -41,7 +41,7 @@ export class BlogService {
     public afs: AngularFirestore,
     public router: Router,
     private http: HttpClient
-  ) { }
+  ) {}
 
   // getUser(){
   //   let headers =  new Headers()
@@ -95,7 +95,6 @@ export class BlogService {
   }
 
   approveBlog(id: string) {
-
     return this.http.put(
       `${this.api}/api/blogs/reviewblogs/approve/${id}`,
       httpAdminOptions
@@ -118,19 +117,24 @@ export class BlogService {
     return this.http.get(`${this.api}/api/projects`);
   }
   addProject(data) {
-    return this.http.post(`${this.api}/api/projects/new`, data, httpOptions)
+    return this.http.post(`${this.api}/api/projects/new`, data, httpOptions);
+  }
+  viewGallery() {
+    return this.http.get(`${this.api}/thumbnail/viewgallery`);
   }
   uploadImage(file) {
     const formData = new FormData();
-    formData.append("file", file);
-    return this.http.post(`${this.api}/thumbnail/upload`, formData, {
-      headers: {
-        "Content-Type": file.type
-      }
-    });
+    formData.append("photo", file);
+    return this.http.post(`${this.api}/thumbnail/upload`, formData);
   }
-
-
+  uploadGallery(files, category) {
+    const formData = new FormData();
+    formData.append("category", category);
+    for (var i = 0; i < files.length; i++) {
+      formData.append("photo", files[i]);
+    }
+    return this.http.post(`${this.api}/thumbnail/gallery/upload`, formData);
+  }
   // -----------FIREBASE-------------
 
   getBlogsFromFirestore() {

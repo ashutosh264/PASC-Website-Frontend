@@ -17,8 +17,9 @@ const helper = new JwtHelperService();
 export class BlogDetailComponent implements OnInit {
   blog;
   currentUser: any;
+  isAdmin;
   admin: boolean;
-
+  api = "http://localhost:3000";
   constructor(
     private blogService: BlogService,
     private route: ActivatedRoute,
@@ -29,16 +30,25 @@ export class BlogDetailComponent implements OnInit {
   token;
 
   ngOnInit() {
-    // this.token = this.authService.loadToken();
-    // this.currentUser = helper.decodeToken(this.token);
-    // this.admin = this.currentUser.admin;
-
+    this.token = this.authService.loadToken();
+    this.currentUser = false;
     const id = this.route.snapshot.params["id"];
     this.blog = this.blogService.getSelectedBlog(id).subscribe(data => {
       this.blog = data;
+      this.blog.image = this.api + "/" + this.blog.image;
       console.log("data fethced");
       this.titleService.setTitle(this.blog.heading);
     });
+    this.onStart();
+  }
+  async onStart() {
+    if (this.token) {
+      (await this.authService.isadmin()).subscribe(res => {
+        this.isAdmin = res;
+        this.admin = this.isAdmin.admin;
+        console.log(this.admin);
+      });
+    }
   }
   markCompleted(id: string) {
     this.blogService.approveBlog(id).subscribe(res => {
@@ -46,6 +56,8 @@ export class BlogDetailComponent implements OnInit {
     });
   }
   deleteBlog(id: string) {
-    this.blogService.deleteBlog(id).subscribe();
+    this.blogService.deleteBlog(id).subscribe(res => {
+      this.router.navigate(["reviewblogs"]);
+    });
   }
 }
