@@ -62,9 +62,15 @@ import { AchieveComponent } from './components/achieve/achieve.component';
 
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+
+
 import { NewprojectComponent } from './components/newproject/newproject.component';
+import { AdminProjectsComponent } from './components/admin-projects/admin-projects.component';
 
 import { BasicAuthInterceptor} from './shared/interceptor';
+
+
 
 
 
@@ -103,7 +109,8 @@ import { BasicAuthInterceptor} from './shared/interceptor';
     AdminFeedbackComponent,
     FooterComponent,
     AchieveComponent,
-    NewprojectComponent
+    NewprojectComponent,
+    AdminProjectsComponent,
   ],
   imports: [
     BrowserModule,

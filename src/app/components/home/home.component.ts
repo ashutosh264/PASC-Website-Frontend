@@ -72,26 +72,11 @@ export class HomeComponent implements OnInit {
       });
     });
 
-    setTimeout(() => {
-      this.getData();
-
-    }, 2000);
-
+  
 
   }
 
-  getData() {
-    this.eventService.getEventsFromFirestore()
-      .subscribe(result => {
-
-        result.forEach((item) => {
-
-          this.items.push(item);
-        })
-
-
-      })
-  }
+ 
 
 
 }
