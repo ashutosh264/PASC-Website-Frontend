@@ -63,6 +63,6 @@ export class NewprojectComponent implements OnInit {
     setTimeout(() => {
       this.created = false;
       this.router.navigate(["/achieve"]);
-    }, 1800);
+    }, 1000);
   }
 }

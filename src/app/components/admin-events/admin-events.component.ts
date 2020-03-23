@@ -39,8 +39,9 @@ export class AdminEventsComponent implements OnInit {
   token
   ngOnInit() {
    
-     this.token = this.authService.loadToken()
+    this.token = this.authService.loadToken()
     this.currentUser = helper.decodeToken(this.token);
+
     this.upcomingService.getEventFromFirestore().subscribe(item => {this.upcomings = item});
   }
 

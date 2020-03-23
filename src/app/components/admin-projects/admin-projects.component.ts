@@ -52,7 +52,7 @@ export class AdminProjectsComponent implements OnInit {
       console.log(approvedPro);
       this.onModalClose();
     },err =>{
-      console.log(err);
+      console.log("err");
       this.onModalClose();
     })
   }
