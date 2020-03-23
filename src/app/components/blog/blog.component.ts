@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Blog } from "src/app/shared/blog";
 import { ElementRef } from "@angular/core";
 import { Title } from "@angular/platform-browser";
+import { environment } from "../../../environments/environment";
+
 
 @Component({
   selector: "app-blog",
@@ -11,7 +13,8 @@ import { Title } from "@angular/platform-browser";
 export class BlogComponent implements OnInit {
   @Input()
   blog;
-  api = 'http://localhost:3000'
+  
+  api = environment.port
 
   constructor(private elementRef: ElementRef, private titleService: Title) {}
 

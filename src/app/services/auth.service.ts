@@ -80,7 +80,7 @@ export class AuthService {
 
   async authGoogle() {
     console.log("google auth");
-    window.location.href='http://localhost:3000/auth/google';
+    window.location.href=`${this.api}/auth/google`;
   }
 
   async loginGoogle(id:string){

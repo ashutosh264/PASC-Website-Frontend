@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { BlogService } from "../services/blog.service"
 import { Title } from "@angular/platform-browser";
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: "app-view-gallery",
@@ -10,7 +11,7 @@ import { Title } from "@angular/platform-browser";
 export class ViewGalleryComponent implements OnInit {
   title = "Gallery";
   items;
-  api = 'http://localhost:3000';
+  api = environment.port;
   constructor(public blogService: BlogService, private titleService: Title) {}
 
   ngOnInit() {

@@ -35,7 +35,6 @@ export class BlogService {
   feedback: any;
   authToken;
 
-  // api = "http://localhost:3000";
   api = environment.port;
   constructor(
     public afs: AngularFirestore,

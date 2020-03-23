@@ -6,6 +6,8 @@ import { Title } from "@angular/platform-browser";
 import { AuthService } from "../../services/auth.service";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from "@angular/router";
+import { environment } from "../../../environments/environment";
+
 
 const helper = new JwtHelperService();
 
@@ -19,7 +21,7 @@ export class BlogDetailComponent implements OnInit {
   currentUser: any;
   isAdmin;
   admin: boolean;
-  api = "http://localhost:3000";
+  api = environment.port;
   constructor(
     private blogService: BlogService,
     private route: ActivatedRoute,
