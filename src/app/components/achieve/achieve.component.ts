@@ -27,7 +27,6 @@ export class AchieveComponent implements OnInit {
     });
     this.elementRef.nativeElement.appendChild(s);
     this.titleService.setTitle(this.title);
-    console.log(this.projects)
   }
   passData(pro) {
     this.mpro = pro

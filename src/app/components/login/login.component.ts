@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
      res =>{
      this.result = res;
      if(!this.result.error){
-       console.log(this.result.token.toString())
 
        this.authService.storeToken( this.result.token )
 

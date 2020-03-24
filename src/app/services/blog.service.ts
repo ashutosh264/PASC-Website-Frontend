@@ -82,7 +82,6 @@ export class BlogService {
         Authorization: Token
       })
     };
-    console.log(httpAdmin);
     return this.http.get<Blog[]>(
       `${this.api}/api/blogs/reviewblogs`,
       httpAdmin
