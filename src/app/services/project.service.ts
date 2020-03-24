@@ -31,7 +31,7 @@ export class ProjectService {
         "Authorization": token
       })
     }
-    return this.http.get(`${this.url}/reviewprojects`,httpAdmin)
+    return this.http.get(`${this.url}/api/projects/reviewprojects`,httpAdmin)
   }
 
   deleteAProject(projectid){
@@ -43,7 +43,7 @@ export class ProjectService {
         "Authorization": token
       })
     }
-    return this.http.delete(`${this.url}/admin/delete/${projectid}`,httpAdmin)
+    return this.http.delete(`${this.url}/api/projects/admin/delete/${projectid}`,httpAdmin)
   }
 
   approveProject(projectid){
@@ -55,6 +55,6 @@ export class ProjectService {
         "Authorization": token
       })
     }
-    return this.http.put(`${this.url}/reviewprojects/approve/${projectid}`,{},httpAdmin)
+    return this.http.put(`${this.url}/api/projects/reviewprojects/approve/${projectid}`,{},httpAdmin)
   }
 }

@@ -63,7 +63,7 @@ const routes: Routes = [
   {path: 'table', component: TableComponent, canActivate: [AuthGuard]},
   {path: 'feedback', component: AdminFeedbackComponent, canActivate: [AuthGuard]},
   {path : 'adminDetails/:id' , component : AdminVdetailsComponent, canActivate : [ AuthGuard ]},
-  {path: 'bWsXeYHAPgFkIQTA8Bx5twAePYssw9BUOBc67BCItJW71OQzqVuqx4ooD5Eog8slSOV5z', component: GoogleOauthComponent  , canActivate: [SecureInnerPagesGuard]},
+  {path: '75u6sD1nDLadfb16P8VG0qYGxZXjNp8UuAkEcF2OeJ7XE1SU14h5ey7FdmDhsyLYYWdPe52oXmSbnFzYeuXu0CnT9ajwuCgyVYMipjhyEvAfzeXoRNp61p8XMLU4PGFjoRGxxhqX4SxpIio7gPb03CuLxStM2X3HGQ8wVtGYDeBZtsvEwRzhn0FI1vwleS5Z3ZjUBF26/:token', component: GoogleOauthComponent  , canActivate: [SecureInnerPagesGuard]},
   {path:'projects', component: AdminProjectsComponent, canActivate: [AuthGuard]},
   {path: 'reset/:id',component: ForgotRedirectComponent},
 

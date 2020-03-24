@@ -72,6 +72,7 @@ import { BasicAuthInterceptor} from './shared/interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { GoogleOauthComponent } from './components/google-oauth/google-oauth.component';
 import { ForgotRedirectComponent } from './components/forgot-redirect/forgot-redirect.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 
@@ -115,6 +116,7 @@ import { ForgotRedirectComponent } from './components/forgot-redirect/forgot-red
     AdminProjectsComponent,
     GoogleOauthComponent,
     ForgotRedirectComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
