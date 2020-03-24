@@ -76,7 +76,6 @@ export class NewBlogComponent implements OnInit {
       };
       this.created = true;
       const a = await this.blogService.addBlog(data).subscribe();
-      console.log(a);
       setTimeout(() => {
         this.created = false;
         this.router.navigate(["/blogs"]);
@@ -120,13 +119,10 @@ export class NewBlogComponent implements OnInit {
     // }
     const file = event.target.files[0];
     const a = await this.blogService.uploadImage(file).subscribe();
-    console.log(a);
   }
 
   async onSubmit(event) {
-    console.log(event);
     const file = event.target.elements[0].files[0];
-    console.log(file);
     await this.blogService.uploadImage(file).subscribe(item => {
       this.master = item;
     });
@@ -135,12 +131,10 @@ export class NewBlogComponent implements OnInit {
   upload(event) {
     if (this.isLogin) {
       const file = event.target.files[0];
-      console.log(event);
       if (file.type.split("/")[0] !== "image") {
         return alert("Choose A Image File");
       }
       let a = this.blogService.uploadImage(event.target.files[0]).subscribe();
-      console.log(a);
     } else {
       window.alert(" Stop Using JWT TOKEN to login in !! ");
       localStorage.clear();

@@ -61,7 +61,6 @@ export class TableComponent implements OnInit {
 
     this.created = true;
     const a = await this.eventService.createE(data).subscribe()
-    console.log(a)
     setTimeout(() => {
       this.created = false;
       this.router.navigate(['/events']);
