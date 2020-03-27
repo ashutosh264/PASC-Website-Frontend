@@ -64,8 +64,8 @@ export class NewBlogComponent implements OnInit {
         content: this.content,
         heading: this.heading,
         subHeading: this.subHeading,
-        image: this.master.path,
-        thumb: this.master.thumb,
+        image: this.image,
+        thumb: this.image,
         date: new Date().toISOString(),
         category: this.category,
         author: {
@@ -74,6 +74,7 @@ export class NewBlogComponent implements OnInit {
         },
         approve: false
       };
+      console.log(data);
       this.created = true;
       const a = await this.blogService.addBlog(data).subscribe();
       console.log(a);
@@ -90,47 +91,42 @@ export class NewBlogComponent implements OnInit {
     // }
   }
   async uploadImage(event) {
-    // if (this.isLogin) {
-
-    //   const file = event.target.files[0];
-    //   const path = `posts/${file.name}`;
-    //   const fileRef = this.storage.ref(path);
-    //   if (file.type.split("/")[0] !== "image") {
-    //     return alert("Choose A Image File");
-    //   } else {
-    //     const task = this.storage.upload(path, file);
-    //     this.uploadPer = task.percentageChanges();
-    //     task
-    //       .snapshotChanges()
-    //       .pipe(
-    //         finalize(() => {
-    //           this.downloadURL = fileRef.getDownloadURL();
-    //           this.downloadURL.subscribe(url => (this.image = url));
-    //         })
-    //       )
-    //       .subscribe();
-    //     console.log("Image Uploaded");
-    //   }
-    // }
-    // else {
-    //   window.alert(" Stop Using JWT TOKEN to login in !! ")
-    //   localStorage.clear();
-    //   this.router.navigate(["login"]);
-
-    // }
-    const file = event.target.files[0];
-    const a = await this.blogService.uploadImage(file).subscribe();
-    console.log(a);
+    if (this.isLogin) {
+      const file = event.target.files[0];
+      const path = `posts/${file.name}`;
+      const fileRef = this.storage.ref(path);
+      if (file.type.split("/")[0] !== "image") {
+        return alert("Choose A Image File");
+      } else {
+        const task = this.storage.upload(path, file);
+        this.uploadPer = task.percentageChanges();
+        task
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              this.downloadURL = fileRef.getDownloadURL();
+              this.downloadURL.subscribe(url => (this.image = url));
+            })
+          )
+          .subscribe();
+        console.log("Image Uploaded");
+      }
+    } else {
+      window.alert(" Stop Using JWT TOKEN to login in !! ");
+      localStorage.clear();
+      this.router.navigate(["login"]);
+    }
   }
 
-  async onSubmit(event) {
-    console.log(event);
-    const file = event.target.elements[0].files[0];
-    console.log(file);
-    await this.blogService.uploadImage(file).subscribe(item => {
-      this.master = item;
-    });
-  }
+  // async onSubmit(event) {
+  //   console.log(event);
+  //   const file = event.target.elements[0].files[0];
+  //   console.log(file);
+  //   await this.blogService.uploadImage(file).subscribe(item => {
+  //     this.master = item;
+  //     console.log(item);
+  //   });
+  // }
 
   upload(event) {
     if (this.isLogin) {
@@ -139,8 +135,7 @@ export class NewBlogComponent implements OnInit {
       if (file.type.split("/")[0] !== "image") {
         return alert("Choose A Image File");
       }
-      let a = this.blogService.uploadImage(event.target.files[0]).subscribe();
-      console.log(a);
+
     } else {
       window.alert(" Stop Using JWT TOKEN to login in !! ");
       localStorage.clear();

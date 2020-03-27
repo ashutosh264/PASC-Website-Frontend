@@ -3,6 +3,8 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
+import { BlogService } from "../services/blog.service";
+
 
 @Component({
   selector: 'upload-task',
@@ -20,7 +22,7 @@ export class UploadTaskComponent implements OnInit {
   downloadURL: string;
   select: number;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore) { }
+  constructor(private storage: AngularFireStorage, private db: AngularFirestore, public blogService: BlogService) { }
 
   ngOnInit() {
     this.startUpload();
@@ -46,8 +48,9 @@ export class UploadTaskComponent implements OnInit {
       finalize( async() =>  {
         this.select= this.selected;
         this.downloadURL = await ref.getDownloadURL().toPromise();
-
-        this.db.collection('files').add( { downloadURL: this.downloadURL, path , album: this.selected} );
+        const data = await this.blogService.addFiles({path : this.downloadURL, thumb : this.downloadURL, category : this.selected}).subscribe()
+        console.log(data)
+        // this.db.collection('files').add( { downloadURL: this.downloadURL, path , album: this.selected} );
       }),
     );
   }

@@ -35,12 +35,12 @@
   >
     <h3>Drop Zone</h3>
     <p>Drag and Drop a File</p>
-    <p>{{nofiles}} files uploaded</p>
+    
+  </div>
+  <div *ngFor="let file of files">
+    <upload-task [file]="file" [selected]="selected"></upload-task>
   </div>
 
-  <div [hidden]="done">
-    <mat-spinner style="margin:0 auto;" mode="indeterminate"></mat-spinner>
-  </div>
 </div>
 
 <div *ngIf="!currentUser">

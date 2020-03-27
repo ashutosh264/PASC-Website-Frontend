@@ -14,7 +14,8 @@ export class BlogComponent implements OnInit {
   @Input()
   blog;
   
-  api = environment.port
+  // api = environment.port;
+  api = 'http://localhost:3000/thumbnail/image'
 
   constructor(private elementRef: ElementRef, private titleService: Title) {}
 
