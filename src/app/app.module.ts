@@ -73,6 +73,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { GoogleOauthComponent } from './components/google-oauth/google-oauth.component';
 import { ForgotRedirectComponent } from './components/forgot-redirect/forgot-redirect.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -144,7 +145,8 @@ import { ModalComponent } from './components/modal/modal.component';
     MatNativeDateModule,
     RecaptchaModule,
     RecaptchaFormsModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [CookieService
   

@@ -30,8 +30,7 @@ export class GoogleOauthComponent implements OnInit {
     // this.cookie.delete("jwt")
     this.authToken = this.route.snapshot.params["token"];
     this.authUser = helper.decodeToken(this.authToken);
-    console.log(this.authToken);
-    console.log(this.authUser);
+
     if (this.authUser.errgol) {
       (await this.authService.loginGoogle(this.authUser.subject)).subscribe(
         res => {

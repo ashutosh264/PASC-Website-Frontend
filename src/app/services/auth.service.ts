@@ -79,7 +79,6 @@ export class AuthService {
   }
 
   async authGoogle() {
-    console.log("google auth");
     window.location.href=`${this.api}/auth/google`;
   }
 

@@ -68,7 +68,6 @@ export class NewprojectComponent implements OnInit {
       };
       this.created = true;
       const a = await this.blogService.addProject(data).subscribe();
-      console.log(a);
       window.alert('Project Submitted For Evaluation');
       setTimeout(() => {
         this.created = false;
