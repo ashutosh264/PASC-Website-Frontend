@@ -37,7 +37,7 @@ export class BlogDetailComponent implements OnInit {
     const id = this.route.snapshot.params["id"];
     this.blog = this.blogService.getSelectedBlog(id).subscribe(data => {
       this.blog = data;
-      this.blog.image = this.api + "/" + this.blog.image;
+      // this.blog.image = this.api + "/" + this.blog.image;
       console.log("data fethced");
       this.titleService.setTitle(this.blog.heading);
     });

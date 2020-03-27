@@ -120,18 +120,24 @@ export class BlogService {
   viewGallery() {
     return this.http.get(`${this.api}/thumbnail/viewgallery`);
   }
-  uploadImage(file) {
-    const formData = new FormData();
-    formData.append("photo", file);
-    return this.http.post(`${this.api}/thumbnail/upload`, formData);
-  }
-  uploadGallery(files, category) {
-    const formData = new FormData();
-    formData.append("category", category);
-    for (var i = 0; i < files.length; i++) {
-      formData.append("photo", files[i]);
-    }
-    return this.http.post(`${this.api}/thumbnail/gallery/upload`, formData);
+  // uploadImage(file) {
+  //   const formData = new FormData();
+  //   formData.append("photo", file);
+  //   return this.http.post(`${this.api}/thumbnail/upload`, formData);
+  // }
+  // uploadGallery(files, category) {
+  //   const formData = new FormData();
+  //   formData.append("category", category);
+  //   for (var i = 0; i < files.length; i++) {
+  //     formData.append("photo", files[i]);
+  //   }
+  //   return this.http.post(`${this.api}/thumbnail/gallery/upload`, formData);
+  // }
+
+  addFiles(fileObject) {
+    console.log('request Sent');
+    return this.http.post(`${this.api}/thumbnail/upload/firebase`, fileObject);
+
   }
   // -----------FIREBASE-------------
 
