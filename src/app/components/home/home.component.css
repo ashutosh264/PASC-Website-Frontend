@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato:300&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Lato:300&display=swap");
 html {
   font-family: sans-serif;
   line-height: 1.15;
@@ -19,12 +19,15 @@ body {
   background-color: #fff;
 }
 
-.btaa:hover{
-  background-color:rgb(26,58,120);
+.btaa:hover {
+  background-color: rgb(26, 58, 120);
   color: black;
 }
-.btaa{
-  font-size: 25px !important; background-color: #0ab1f0; padding: 10px 25px!important;border-radius: 25px 
+.btaa {
+  font-size: 25px !important;
+  background-color: #0ab1f0;
+  padding: 10px 25px !important;
+  border-radius: 25px;
 }
 
 body,
@@ -51,10 +54,15 @@ html {
   /*text-align: center;*/
   /*font-weight: 300;*/
   color: #fff;
-  font-family: 'Lato', sans-serif;
-  text-shadow: 1px 1px  3px #000,
-               -1px -1px 3px  #000;
+  font-family: "Lato", sans-serif;
+  text-shadow: 1px 1px 3px #000, -1px -1px 3px #000;
+}
 
+.winner {
+  width: 30vw;
+  transform: translate(-50%, -50%);
+  margin-left: 50%;
+  margin-top: 30%;
 }
 
 @media screen and (max-width: 768px) {
@@ -64,6 +72,10 @@ html {
     top: 50%;
     left: 50%;
     font-size: 12vw;
+  }
+  .winner {
+    width: 70vw;
+    margin-top: 50%;
   }
 }
 
@@ -619,8 +631,6 @@ html {
   background-color: #fdb811;
   box-shadow: 0 14px 14px -3px rgba(253, 184, 17, 0.42);
 }
-
-
 
 @media only screen and (min-width: 1200px) {
   .square {
@@ -1231,13 +1241,10 @@ html {
   transition: none;
 }
 
-
-
 .is-loaded .slideshow__slide-caption {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
-
 
 @media (max-height: 500px) {
   .slideshow__slide-caption-title {
@@ -1250,8 +1257,6 @@ html {
     font-size: 40px;
     /*margin-bottom: 150px;*/
   }
-
-  
 }
 @media (min-width: 700px) {
   .slideshow__slide-caption-title {
@@ -1260,14 +1265,9 @@ html {
   }
 }
 
-
-
-
 .slideshow__slide-caption-title.-full {
   width: 100%;
 }
-
-
 
 .slideshow__slide-caption-subtitle.-load {
   transition: -webkit-transform 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
@@ -1301,8 +1301,6 @@ body[data-route-option="next-section"]
   transform: translateZ(0);
   display: inline-block;
 }
-
-
 
 /* OLD */
 .c-header-home_heading {
@@ -2773,9 +2771,6 @@ h6,
   display: none;
 }
 
-
-
-
 .c-header-home_footer {
   z-index: 3;
   position: absolute;
@@ -2948,4 +2943,3 @@ body[data-route-option="next-section"] .c-header-home_buttons {
     opacity: 0;
   }
 }
-

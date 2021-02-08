@@ -13,9 +13,11 @@ export class BlogListComponent implements OnInit {
   blogs;
   constructor(private blogService: BlogService, private titleService: Title) {}
 
+
   ngOnInit() {
     this.blogService.getBlogs().subscribe(item => {
       this.blogs = item;
+      console.log(this.blogs) 
     });
 
     this.titleService.setTitle(this.title);

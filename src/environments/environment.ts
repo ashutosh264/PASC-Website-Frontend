@@ -13,7 +13,7 @@ export const environment = {
     appId: "1:503881790645:web:0f1a4fff0424b7dc963afc",
     measurementId: "G-F9V7KH4YDX"
   },
-  port : "http://localhost:3000"
+  port : "https://aqueous-reef-84831.herokuapp.com"
 };
 
 /*
@@ -24,3 +24,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+ 
