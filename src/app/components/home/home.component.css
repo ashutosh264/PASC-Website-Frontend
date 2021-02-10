@@ -19,6 +19,26 @@ body {
   background-color: #fff;
 }
 
+.register {
+  background-color : #31B0D5;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border-color: #46b8da;
+  transition: all ease-in-out 0.3s;
+}
+
+.mybutton {
+  z-index: 9999;
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+}
+
+.register:hover{
+  background-color: #003a78;
+}
+
 .btaa:hover {
   background-color: rgb(26, 58, 120);
   color: black;
